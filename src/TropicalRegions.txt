@@ -1,0 +1,6 @@
+# RectRegion
+# Template for User-Defined RectRegion GeoRegions
+# (1)ID, (2)pID, (3)N, (4)W, (5)S, (6)E, (7)Description, (8)Notes
+
+TRP, GLB, 30, 0, -30, 360, Tropics
+TRP_IPO, TRP, 15, 30, -15, 295, Tropical-Indian-Pacific-Ocean
