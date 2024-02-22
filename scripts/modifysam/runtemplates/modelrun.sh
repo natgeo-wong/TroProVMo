@@ -20,21 +20,14 @@
 module purge
 module load intel/23.0.0-fasrc01 intelmpi/2021.8.0-fasrc01 netcdf-fortran/4.6.0-fasrc03
 
-case=[schname]
-experiment=[experiment]
-config=[config]
-sndname=[sndname]
-lsfname=[lsfname]
-ensemblemember=member[xx]
+exproot=[project]/exp
+prmfile=$exproot/prm/[schname]/[expname]/[runname]/[memberx].prm
+sndfile=$exproot/snd/[sndname]
+lsffile=$exproot/lsf/[lsfname]
 
-exproot=[directory]/exp
-prmfile=$exproot/prm/[schname]/$experiment/$config/${ensemblemember}.prm
-sndfile=$exproot/snd/$sndname
-lsffile=$exproot/lsf/$lsfname
-
-prmloc=./$case/prm
-sndloc=./$case/snd
-lsfloc=./$case/lsf
+prmloc=./[schname]/prm
+sndloc=./[schname]/snd
+lsfloc=./[schname]/lsf
 
 cp $prmfile $prmloc
 cp $sndfile $sndloc
@@ -46,26 +39,26 @@ echo $case > CaseName
 
 cd ./OUT_3D
 
-for fcom3D in *$ensemblemember*.com3D
+for fcom3D in *[memberx]*.com3D
 do
     rm "$fcom3D"
 done
 
-for fcom2D in *$ensemblemember*.com2D
+for fcom2D in *[memberx]*.com2D
 do
     rm "$fcom2D"
 done
 
 cd ../OUT_2D
 
-for f2Dcom in *$ensemblemember*.2Dcom
+for f2Dcom in *[memberx]*.2Dcom
 do
     rm "$f2Dcom"
 done
 
 cd ../OUT_STAT
 
-for fstat in *$ensemblemember*.stat
+for fstat in *[memberx]*.stat
 do
     rm "$fstat"
 done
@@ -74,6 +67,8 @@ cd ..
 
 cd $scriptdir
 export OMPI_MCA_btl="self,openib"
+unset I_MPI_PMI_LIBRARY
+export I_MPI_JOB_RESPECT_PROCESS_PLACEMENT=0
 mpirun -np $SLURM_NTASKS $SAMname > ./LOGS/samrun.${SLURM_JOBID}.log
 
 exitstatus=$?
@@ -81,7 +76,7 @@ echo SAM stopped with exit status $exitstatus
 
 cd ./OUT_3D
 
-for fcom3D in *$ensemblemember*.com3D
+for fcom3D in *[memberx]*.com3D
 do
     if com3D2nc "$fcom3D" >& /dev/null
     then
@@ -92,7 +87,7 @@ do
     fi
 done
 
-for fcom2D in *$ensemblemember*.com2D
+for fcom2D in *[memberx]*.com2D
 do
     if com2D2nc "$fcom2D" >& /dev/null
     then
@@ -105,7 +100,7 @@ done
 
 cd ../OUT_2D
 
-for f2Dcom in *$ensemblemember*.2Dcom
+for f2Dcom in *[memberx]*.2Dcom
 do
     if 2Dcom2nc "$f2Dcom" >& /dev/null
     then
@@ -118,7 +113,7 @@ done
 
 cd ../OUT_STAT
 
-for fstat in *$ensemblemember*.stat
+for fstat in *[memberx]*.stat
 do
     if stat2nc "$fstat" >& /dev/null
     then

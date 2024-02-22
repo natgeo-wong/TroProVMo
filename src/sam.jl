@@ -3,8 +3,8 @@ using Printf
 using Statistics
 using Trapz
 
-dampingstrprnt(am::Real)     = replace(   "damping$(@sprintf("%06.2f",am ))","."=>"d")
-relaxscalestrprnt(tau::Real) = replace("relaxscale$(@sprintf("%06.3f",tau))","."=>"d")
+dampingstrprnt(am::Real)     = replace(   "damping$(@sprintf("%04.2f",am ))")
+relaxscalestrprnt(tau::Real) = replace("relaxscale$(@sprintf("%05.3f",tau))")
 
 # function outstatname(
 #     scheme  :: AbstractString,
