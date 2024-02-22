@@ -1,5 +1,5 @@
 using DrWatson
-@quickactivate "ExploreWTGSpace"
+@quickactivate "TroProVMo"
 using Logging
 using Printf
 

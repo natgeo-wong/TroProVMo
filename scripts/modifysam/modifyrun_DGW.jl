@@ -1,5 +1,5 @@
 using DrWatson
-@quickactivate "ExploreWTGSpace"
+@quickactivate "TroProVMo"
 using Printf
 
 include(srcdir("sam.jl"))
