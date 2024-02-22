@@ -25,12 +25,12 @@ sst = zeros(nlon,nlat,12)
 for dt in e5ds.start : Year(1) : e5ds.stop
 
     ds = read(e5ds,evar_sst,egeo,dt)
-    sst[:,:,:] .+= nomissing(ds[evar_sst.ID][:,:,:],NaN)
+    sst[:,:,:] += nomissing(ds[evar_sst.ID][:,:,:],NaN)
     close(ds)
 
     for ipre in 1 : npre
         ds = read(e5ds,evar_w[ipre],egeo,dt)
-        w[:,:,:,ipre] .+= ds[evar_w[ipre].ID][:,:,:]
+        w[:,:,:,ipre] += ds[evar_w[ipre].ID][:,:,:]
         close(ds)
     end
 
@@ -64,10 +64,15 @@ ncsst = defVar(eds,evar_sst.ID,Float64,("longitude","latitude","month"),attrib =
     "units"         => evar_sst.units,
 ))
 
-ncw = defVar(eds,evar_w.ID,Float64,("longitude","latitude","month","level"),attrib = Dict(
-    "long_name"     => evar_w.long,
-    "full_name"     => evar_w.name,
-    "units"         => evar_w.units,
+ncw = defVar(eds,evar_w[1].ID,Float64,("longitude","latitude","month","level"),attrib = Dict(
+    "long_name"     => evar_w[1].long,
+    "full_name"     => evar_w[1].name,
+    "units"         => evar_w[1].units,
 ))
+
+nclon[:] = elsd.lon
+nclat[:] = elsd.lat
+ncsst[:,:,:] = sst
+ncw[:,:,:,:] = w
 
 close(eds)
