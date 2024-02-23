@@ -35,7 +35,7 @@ cp $lsffile $lsfloc
 
 scriptdir=$SLURM_SUBMIT_DIR
 SAMname=`ls $scriptdir/SAM_*`
-echo $case > CaseName
+echo [schname] > CaseName
 
 cd ./OUT_3D
 

@@ -18,7 +18,7 @@ open(mrun,"r") do frun
     for wtgii in wtgvec, sst in sstvec
         
         expname = "$(expinit)$(dampingstrprnt(wtgii))"
-        runname = "$(@sprintf("%5.1f",sst))"
+        runname = "SST$(@sprintf("%5.1f",sst))K"
 
         for ensembleii in 1 : 5
 
@@ -47,7 +47,7 @@ open(brun,"r") do frun
     for wtgii in wtgvec, sst in sstvec
         
         expname = "$(expinit)$(dampingstrprnt(wtgii))"
-        runname = "$(@sprintf("%5.1f",sst))"
+        runname = "SST$(@sprintf("%5.1f",sst))K"
         nrun = projectdir("run","DGW",expname,runname,"Build.csh")
 
         open(nrun,"w") do wrun
