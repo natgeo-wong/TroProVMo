@@ -1,13 +1,11 @@
 &PARAMETERS
 
-caseid ='TroProVMo-T[wtgstring]-SST[sst]K-member[xx]',
+caseid ='TroProVMo-[wtgstring]-[sst]K',
 
 dx = 2000.,
 dy = 2000.,
 dt = 10.,
 
-doensemble    = .true.,
-nensemble     = [en],
 nrestart      = 0,
 nrestart_skip = 239,
 perturb_type  = 0,
