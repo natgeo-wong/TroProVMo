@@ -4,7 +4,20 @@ using Statistics
 using Trapz
 
 dampingstrprnt(am::Real)     = replace(   "damping$(@sprintf("%06.2f",am ))")
-relaxscalestrprnt(tau::Real) = replace("relaxscale$(@sprintf("%05.2f",tau))")
+relaxscalestrprnt(tau::Real) = replace("relaxscale$(@sprintf("%06.3f",tau))")
+
+function powername(
+    power  :: Real,
+    scheme :: AbstractString
+)
+
+    if scheme == "DGW"
+        return dampingstrprnt(power)
+    else
+        return relaxscalestrprnt(power)
+    end
+
+end
 
 # function outstatname(
 #     scheme  :: AbstractString,
