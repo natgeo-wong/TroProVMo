@@ -4,7 +4,7 @@ using Statistics
 using Trapz
 
 dampingstrprnt(am::Real)     = replace(   "damping$(@sprintf("%06.2f",am ))")
-relaxscalestrprnt(tau::Real) = replace("relaxscale$(@sprintf("%06.3f",tau))")
+relaxscalestrprnt(tau::Real) = replace("relaxscale$(@sprintf("%06.2f",tau))")
 
 function powername(
     power  :: Real,

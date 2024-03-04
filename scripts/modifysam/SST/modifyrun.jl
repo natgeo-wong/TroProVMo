@@ -11,10 +11,10 @@ tprm    = projectdir("exp","tmp.prm")
 sstvec  = vcat(295:299,299.5:0.1:299.9,300.1:0.1,300.5,301:305)
 
 if schname == "DGW"
-    wtgvec = [0.02,0.05,0.1,0.2,0.5,1,2,5,10,20,50,100,200,500]
+    wtgvec = [0.05,0.1,0.2,0.5,1,2,5,10,20,50,100,200]
 else
-    wtgvec = [sqrt(2),2,2*sqrt(2.5),5,5*sqrt(2)]
-    wtgvec = vcat(wtgvec/10,1,wtgvec,10,wtgvec*10)
+    wtgvec = [2,2*sqrt(2.5),5]
+    wtgvec = vcat(0.1,wtgvec/10,1,wtgvec,10,wtgvec*10,100)
 end
 
 
