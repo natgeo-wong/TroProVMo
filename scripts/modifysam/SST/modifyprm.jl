@@ -32,7 +32,8 @@ for wtgii in wtgvec, sst in sstvec
     open(tprm,"w") do fprm
         open(oprm,"r") do rprm
             s = read(rprm,String)
-            s = replace(s,"[wtgstring]" => expname)
+            s = replace(s,"[expname]" => expname)
+            s = replace(s,"[runname]" => runname)
             s = replace(s,"[sst]" => @sprintf("%5.1f",sst))
             s = replace(s,"[bool]" => "true")
             s = replace(s,"[am]"  => @sprintf("%7e",wtgdmp))
