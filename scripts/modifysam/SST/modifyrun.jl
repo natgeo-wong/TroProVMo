@@ -8,7 +8,7 @@ email   = ""
 schname = "DGW"
 radname = "P"
 tprm    = projectdir("exp","tmp.prm")
-sstvec  = vcat(295:299,299.5:0.1:299.9,300.1:0.1,300.5,301:305)
+sstvec  = vcat(295:299,299.5:0.1:299.9,300.1:0.1:300.5,301:305)
 
 if schname == "DGW"
     wtgvec = [0.05,0.1,0.2,0.5,1,2,5,10,20,50,100,200]
@@ -26,10 +26,10 @@ open(mrun,"r") do frun
     for wtgii in wtgvec, sst in sstvec
         
         csename = "SST-$(schname)_$(radname)"
-        expname = powername(wtgii)
+        expname = powername(wtgii,schname)
         runname = "SST$(@sprintf("%5.1f",sst))K"
 
-        open(nrun = projectdir("run",csename,expname,"$(runname).sh"),"w") do wrun
+        open(projectdir("run",csename,expname,"$(runname).sh"),"w") do wrun
             sn = replace(s ,"[email]"    => email)
             sn = replace(sn,"[dirname]"  => projectdir())
             sn = replace(sn,"[csename]"  => csename)
@@ -48,7 +48,7 @@ open(brun,"r") do frun
     for wtgii in wtgvec, sst in sstvec
         
         csename = "SST-$(schname)_$(radname)"
-        expname = powername(wtgii)
+        expname = powername(wtgii,schname)
 
         open(projectdir("run",csename,expname,"Build.csh"),"w") do wrun
             sn = replace(s ,"[datadir]" => datadir())
