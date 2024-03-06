@@ -4,11 +4,15 @@ using Printf
 
 include(srcdir("sam.jl"))
 
-email   = ""
 schname = "DGW"
 radname = "P"
-tprm    = projectdir("exp","tmp.prm")
-sstvec  = vcat(295:299,299.5:0.1:299.9,300.1:0.1:300.5,301:305)
+doBuild = true
+email   = ""
+
+sstvec  = vcat(
+    295:297,297.5:0.5:299,299.5:0.1:299.9,
+    300.1:0.1:300.5,301:0.5:302.5,303:305
+)
 
 if schname == "DGW"
     wtgvec = [0.05,0.1,0.2,0.5,1,2,5,10,20,50,100,200]
@@ -16,7 +20,6 @@ else
     wtgvec = [2,2*sqrt(2.5),5]
     wtgvec = vcat(0.1,wtgvec/10,1,wtgvec,10,wtgvec*10,100)
 end
-
 
 mrun = projectdir("run","modifysam","runtemplates","modelrun.sh")
 brun = projectdir("run","modifysam","runtemplates","Build.csh")
@@ -43,19 +46,21 @@ open(mrun,"r") do frun
     end
 end
 
-open(brun,"r") do frun
-    s = read(frun,String)
-    for wtgii in wtgvec, sst in sstvec
-        
-        csename = "SST-$(schname)_$(radname)"
-        expname = powername(wtgii,schname)
+if doBuild
+    open(brun,"r") do frun
+        s = read(frun,String)
+        for wtgii in wtgvec, sst in sstvec
+            
+            csename = "SST-$(schname)_$(radname)"
+            expname = powername(wtgii,schname)
 
-        open(projectdir("run",csename,expname,"Build.csh"),"w") do wrun
-            sn = replace(s ,"[datadir]" => datadir())
-            sn = replace(sn,"[csename]" => csename)
-            sn = replace(sn,"[expname]" => expname)
-            write(wrun,sn)
+            open(projectdir("run",csename,expname,"Build.csh"),"w") do wrun
+                sn = replace(s ,"[datadir]" => datadir())
+                sn = replace(sn,"[csename]" => csename)
+                sn = replace(sn,"[expname]" => expname)
+                write(wrun,sn)
+            end
+
         end
-
     end
 end
