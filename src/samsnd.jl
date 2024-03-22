@@ -3,6 +3,8 @@ using NCDatasets
 using Printf
 using Statistics
 
+include(srcdir("sam.jl"))
+
 function createsndmean(
     sndname :: AbstractString;
     expname :: AbstractString,
@@ -146,9 +148,9 @@ function readsnd(sndname::String)
 	p  = Float64.(data[:,2])
 	pt = Float64.(data[:,3])
 	q  = Float64.(data[:,4])
-	t  = pt .* (p/1000).^(287/1004)
-	rh = calcrh(q/1000,t,p*100)
+	u  = Float64.(data[:,5])
+	v  = Float64.(data[:,6])
 	
-	return z,p,pt,q,t,rh
+	return z,p,pt,q,u,v
 	
 end	
