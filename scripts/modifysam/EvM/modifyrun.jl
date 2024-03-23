@@ -31,7 +31,7 @@ open(mrun,"r") do frun
         expname = powername(wtgii,schname)
         
         for sst in sstvec
-            runname = "w_0.00_fsf+00Wpm2_SST$(@sprintf("%5.1f",sst))K"
+            runname = "w_0.00mps_fsf+00Wpm2_SST$(@sprintf("%5.1f",sst))K"
             open(projectdir("run",csename,expname,"$(runname).sh"),"w") do wrun
                 sn = replace(s ,"[email]"    => email)
                 sn = replace(sn,"[dirname]"  => projectdir())
@@ -45,7 +45,7 @@ open(mrun,"r") do frun
         end
         
         for fsf in fsfvec
-            runname = "w_0.00_fsf+$(@sprintf("%02d",fsf))Wpm2_SST300.0K"
+            runname = "w_0.00mps_fsf+$(@sprintf("%02d",fsf))Wpm2_SST300.0K"
             open(projectdir("run",csename,expname,"$(runname).sh"),"w") do wrun
                 sn = replace(s ,"[email]"    => email)
                 sn = replace(sn,"[dirname]"  => projectdir())
@@ -59,7 +59,7 @@ open(mrun,"r") do frun
         end
         
         for wls in wlsvec
-            runname = "w_$(@sprintf("%04.2f",wls))_fsf+00Wpm2_SST300.0K"
+            runname = "w_$(@sprintf("%04.2f",wls))mps_fsf+00Wpm2_SST300.0K"
             open(projectdir("run",csename,expname,"$(runname).sh"),"w") do wrun
                 sn = replace(s ,"[email]"    => email)
                 sn = replace(sn,"[dirname]"  => projectdir())
