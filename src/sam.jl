@@ -19,6 +19,36 @@ function powername(
 
 end
 
+function fluxtq0(scheme :: AbstractString)
+
+    if scheme == "P"
+        return [10.,90.]
+    else
+        return [20.,120.]
+    end
+
+end
+
+function fluxt0(
+    flux   :: Real,
+    scheme :: AbstractString
+)
+
+    fluxt,fluxq = fluxtq0(scheme)
+    return fluxt * (1 + flux / (fluxt+fluxq))
+
+end
+
+function fluxq0(
+    flux   :: Real,
+    scheme :: AbstractString
+)
+
+    fluxt,fluxq = fluxtq0(scheme)
+    return fluxq * (1 + flux / (fluxt+fluxq))
+
+end
+
 # function outstatname(
 #     scheme  :: AbstractString,
 #     expname :: AbstractString,
