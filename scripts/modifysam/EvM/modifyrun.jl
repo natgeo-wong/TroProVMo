@@ -39,7 +39,7 @@ open(mrun,"r") do frun
                 sn = replace(sn,"[expname]"  => expname)
                 sn = replace(sn,"[runname]"  => runname)
                 sn = replace(sn,"[sndname]"  => "$(radname)_fsf")
-                sn = replace(sn,"[lsfname]"  => "EvM/w_0.00")
+                sn = replace(sn,"[lsfname]"  => "EvM/$(radname)-w_0.00mps")
                 write(wrun,sn)
             end
         end
@@ -53,7 +53,7 @@ open(mrun,"r") do frun
                 sn = replace(sn,"[expname]"  => expname)
                 sn = replace(sn,"[runname]"  => runname)
                 sn = replace(sn,"[sndname]"  => "$(radname)_fsf")
-                sn = replace(sn,"[lsfname]"  => "EvM/w_0.00")
+                sn = replace(sn,"[lsfname]"  => "EvM/$(radname)-w_0.00mps")
                 write(wrun,sn)
             end
         end
@@ -67,7 +67,7 @@ open(mrun,"r") do frun
                 sn = replace(sn,"[expname]"  => expname)
                 sn = replace(sn,"[runname]"  => runname)
                 sn = replace(sn,"[sndname]"  => "$(radname)_fsf")
-                sn = replace(sn,"[lsfname]"  => "EvM/w_$(@sprintf("%04.2f",wls))")
+                sn = replace(sn,"[lsfname]"  => "EvM/$(radname)-w_$(@sprintf("%04.2f",wls))mps")
                 write(wrun,sn)
             end
         end
