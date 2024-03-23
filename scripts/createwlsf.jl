@@ -28,9 +28,9 @@ function wforcing(z,p=zeros(length(z));zbl,w₀)
 
 end
 
-printlsf(joinpath("TvsW","w_0.50"),wforcing(z,p,zbl=1500,w₀=0.50),1009.32)
-printlsf(joinpath("TvsW","w_0.40"),wforcing(z,p,zbl=1500,w₀=0.40),1009.32)
-printlsf(joinpath("TvsW","w_0.30"),wforcing(z,p,zbl=1500,w₀=0.30),1009.32)
-printlsf(joinpath("TvsW","w_0.20"),wforcing(z,p,zbl=1500,w₀=0.20),1009.32)
-printlsf(joinpath("TvsW","w_0.10"),wforcing(z,p,zbl=1500,w₀=0.10),1009.32)
-printlsf(joinpath("TvsW","w_0.05"),wforcing(z,p,zbl=1500,w₀=0.05),1009.32)
+printlsf(joinpath("EvM","w_0.50.lsf"),wforcing(z,p,zbl=1500,w₀=0.50),1009.32)
+printlsf(joinpath("EvM","w_0.40.lsf"),wforcing(z,p,zbl=1500,w₀=0.40),1009.32)
+printlsf(joinpath("EvM","w_0.30.lsf"),wforcing(z,p,zbl=1500,w₀=0.30),1009.32)
+printlsf(joinpath("EvM","w_0.20.lsf"),wforcing(z,p,zbl=1500,w₀=0.20),1009.32)
+printlsf(joinpath("EvM","w_0.10.lsf"),wforcing(z,p,zbl=1500,w₀=0.10),1009.32)
+printlsf(joinpath("EvM","w_0.05.lsf"),wforcing(z,p,zbl=1500,w₀=0.05),1009.32)
