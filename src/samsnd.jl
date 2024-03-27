@@ -3,7 +3,7 @@ using NCDatasets
 using Printf
 using Statistics
 
-include(srcdir("sam.jl"))
+include(srcdir("common.jl"))
 
 function printsnd(fsnd::AbstractString, snddata::Array{<:Real,2}, p::Real)
 

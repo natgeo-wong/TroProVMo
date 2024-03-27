@@ -2,7 +2,7 @@
 
 # specify the scratch directory where object files as well as
 # restart and large output data file will be located :
-setenv SAM_SCR [datadir]/EnergeticvsMechanistic/[schname]/[radname]/[expname]
+setenv SAM_SCR [datadir]/[schname]/[radname]/[expname]
 
 # ----------------------------------
 # specify scalar-advection directory in SRC

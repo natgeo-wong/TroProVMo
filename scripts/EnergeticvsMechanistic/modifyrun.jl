@@ -91,7 +91,7 @@ if doBuild
             expname = powername(wtgii,schname)
             folname = rundir("EnergeticvsMechanistic",schname,radname,expname)
             open(joinpath(folname,"Build.csh"),"w") do wrun
-                sn = replace(s ,"[datadir]" => datadir())
+                sn = replace(s ,"[datadir]" => datadir("EnergeticvsMechanistic"))
                 sn = replace(sn,"[schname]" => schname)
                 sn = replace(sn,"[radname]" => radname)
                 sn = replace(sn,"[expname]" => expname)

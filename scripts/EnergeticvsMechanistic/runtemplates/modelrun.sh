@@ -22,7 +22,7 @@ module load intel/23.0.0-fasrc01 intelmpi/2021.8.0-fasrc01 netcdf-fortran/4.6.0-
 
 exproot=[dirname]/exp
 prmfile=$exproot/prm/EnergeticvsMechanistic/[schname]/[radname]/[expname]/[runname].prm
-sndfile=$exproot/snd/EnergeticvsMechanistic/[radname].snd
+sndfile=$exproot/snd/[radname].snd
 lsffile=$exproot/lsf/EnergeticvsMechanistic/[lsfname].lsf
 
 prmloc=./SAM/prm

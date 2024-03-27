@@ -3,6 +3,8 @@ using NCDatasets
 using Printf
 using Statistics
 
+include(srcdir("common.jl"))
+
 function printlsf(flsf::AbstractString, lsfdata::Array{<:Real,2}, p::Real)
 
     file = lsfdir(flsf)
