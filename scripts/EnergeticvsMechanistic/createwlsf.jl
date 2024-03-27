@@ -4,9 +4,10 @@ using DrWatson
 include(srcdir("samsnd.jl"))
 include(srcdir("samlsf.jl"))
 
-rad = "P_FSF"
+prjname = "EnergeticvsMechanistic"
+radname = "P_FSF"
 
-z,p,_,_,_,_ = readsnd("$(rad).snd"); nz = length(z)
+z,p,_,_,_,_ = readsnd("$(radname).snd"); nz = length(z)
 
 function wforcing(z,p=zeros(length(z));zbl,w₀)
 
@@ -32,6 +33,6 @@ end
 
 for w in ([0,0.5,1,2,3,4,5]/10)
     wstring = @sprintf("%04.2f",w)
-    fid = joinpath("EnergeticvsMechanistic",rad,"w_$(wstring)mps.lsf")
-    printlsf(fid,wforcing(z,p,zbl=1500,w₀=w),1009.32)
+    fid = joinpath(rad,"w_$(wstring)mps.lsf")
+    printlsf(fid,wforcing(z,p,zbl=1500,w₀=w),1009.32;prjname)
 end

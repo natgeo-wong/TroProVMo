@@ -15,7 +15,7 @@ papers/
 references/**/*.pdf
 run/
 exp/run_*
-*.prm
+exp/**/*.prm
 *.lsf
 *.gif
 *.mp4

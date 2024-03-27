@@ -5,9 +5,14 @@ using Statistics
 
 include(srcdir("common.jl"))
 
-function printsnd(fsnd::AbstractString, snddata::Array{<:Real,2}, p::Real)
+function printsnd(
+    fsnd    :: AbstractString, 
+    snddata :: Array{<:Real,2}, 
+    p       :: Real;
+    prjname :: String = ""
+)
 
-    file = snddir(fsnd)
+    file = snddir(fsnd;prjname)
     fdir = dirname(file); if !isdir(fdir); mkpath(fdir); end
 
     nz = size(snddata,1)
@@ -31,9 +36,9 @@ function printsnd(fsnd::AbstractString, snddata::Array{<:Real,2}, p::Real)
 
 end
 
-function readsnd(sndname::String)
+function readsnd(sndname::String; prjname::String="")
 	
-	fsnd = snddir(sndname)
+	fsnd = snddir(sndname;prjname)
 	data = readdlm(fsnd)
 	data = data[2:end,:]; nrow = size(data,1)
 	data = data[2:Int(nrow/2),:]

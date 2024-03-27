@@ -1,8 +1,11 @@
 using DrWatson
 
-expdir(args...) = joinpath(projectdir("exp"), args...)
-prmdir(args...) = joinpath(projectdir("exp","prm"), args...)
-lsfdir(args...) = joinpath(projectdir("exp","lsf"), args...)
-snddir(args...) = joinpath(projectdir("exp","snd"), args...)
+expdir(args...; prjname = "") = joinpath(projectdir("exp",prjname), args...)
+rundir(args...; prjname = "") = joinpath(projectdir("run",prjname), args...)
 
-rundir(args...) = joinpath(projectdir("run"), args...)
+prmdir(args...; prjname = "") = joinpath(expdir("prm"; prjname), args...)
+lsfdir(args...; prjname = "") = joinpath(expdir("lsf"; prjname), args...)
+snddir(args...; prjname = "") = joinpath(expdir("snd"; prjname), args...)
+
+runtemplatedir(args...; prjname = "") = joinpath(rundir("runtemplates";prjname), args...)
+prmtemplatedir(args...; prjname = "") = joinpath(rundir("prmtemplates";prjname), args...)

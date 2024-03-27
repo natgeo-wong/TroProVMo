@@ -5,9 +5,14 @@ using Statistics
 
 include(srcdir("common.jl"))
 
-function printlsf(flsf::AbstractString, lsfdata::Array{<:Real,2}, p::Real)
+function printlsf(
+    flsf    :: AbstractString, 
+    lsfdata :: Array{<:Real,2}, 
+    p       :: Real;
+    prjname :: String = ""
+)
 
-    file = lsfdir(flsf)
+    file = lsfdir(flsf;prjname)
     fdir = dirname(file); if !isdir(fdir); mkpath(fdir); end
 
     nz = size(lsfdata,1)
@@ -31,9 +36,9 @@ function printlsf(flsf::AbstractString, lsfdata::Array{<:Real,2}, p::Real)
 
 end
 
-function readlsf(lsfname::String)
+function readlsf(lsfname::String; prjname::String="")
 	
-	flsf = lsfdir(lsfname)
+	flsf = lsfdir(lsfname;prjname)
 	data = readdlm(flsf)
 	data = data[2:end,:]; nrow = size(data,1)
 	data = data[2:Int(nrow/2),:]

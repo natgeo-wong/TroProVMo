@@ -20,10 +20,11 @@
 module purge
 module load intel/23.0.0-fasrc01 intelmpi/2021.8.0-fasrc01 netcdf-fortran/4.6.0-fasrc03
 
-exproot=[dirname]/exp
-prmfile=$exproot/prm/EnergeticvsMechanistic/[schname]/[radname]/[expname]/[runname].prm
+exproot=[exproot]
+
+prmfile=$exproot/prm/[schname]/[radname]/[pwrname]/[runname].prm
 sndfile=$exproot/snd/[radname].snd
-lsffile=$exproot/lsf/EnergeticvsMechanistic/[lsfname].lsf
+lsffile=$exproot/lsf/[lsfname].lsf
 
 prmloc=./SAM/prm
 sndloc=./SAM/snd
