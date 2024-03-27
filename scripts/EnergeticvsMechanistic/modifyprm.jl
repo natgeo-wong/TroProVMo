@@ -3,6 +3,7 @@ using DrWatson
 using Logging
 using Printf
 
+include(srcdir("common.jl"))
 include(srcdir("sam.jl"))
 
 schname = "DGW"
@@ -18,7 +19,7 @@ fsfvec = collect(10:10:50)
 wlsvec = vcat(0.05,0.1:0.1:0.5)
 
 tprm = expdir("tmp.prm")
-oprm = rundir("modifysam","EnergeticvsMechanistic","prmtemplates",schname,"$radname.prm")
+oprm = rundir("EnergeticvsMechanistic","prmtemplates",schname,"$radname.prm")
 
 for wtgii in wtgvec
 
@@ -67,7 +68,7 @@ for wtgii in wtgvec
             end
         end
         mv(tprm,nprm,force=true)
-        @info "Creating new prm file for EnergeticvsMechanistic $(schname) $(radname)  $expname $runname"
+        @info "Creating new prm file for EnergeticvsMechanistic $(schname) $(radname) $expname $runname"
     end
 
     for wls in wlsvec
@@ -87,7 +88,7 @@ for wtgii in wtgvec
             end
         end
         mv(tprm,nprm,force=true)
-        @info "Creating new prm file for EnergeticvsMechanistic $(schname) $(radname)  $expname $runname"
+        @info "Creating new prm file for EnergeticvsMechanistic $(schname) $(radname) $expname $runname"
     end
     
 end
