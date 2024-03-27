@@ -5,7 +5,8 @@ using Statistics
 
 function printlsf(flsf::AbstractString, lsfdata::Array{<:Real,2}, p::Real)
 
-    file = joinpath(projectdir("exp","lsf",flsf))
+    file = lsfdir(flsf)
+    fdir = dirname(file); if !isdir(fdir); mkpath(fdir); end
 
     nz = size(lsfdata,1)
 
@@ -30,7 +31,7 @@ end
 
 function readlsf(lsfname::String)
 	
-	flsf = projectdir("exp","lsf",lsfname)
+	flsf = lsfdir(lsfname)
 	data = readdlm(flsf)
 	data = data[2:end,:]; nrow = size(data,1)
 	data = data[2:Int(nrow/2),:]

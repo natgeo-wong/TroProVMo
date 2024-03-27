@@ -16,6 +16,7 @@ references/**/*.pdf
 run/
 exp/run_*
 exp/prm/
+exp/lsf/
 *.gif
 *.mp4
 .github
