@@ -7,7 +7,7 @@ include(srcdir("samsnd.jl"))
 
 expii = "P"
 
-z,p,_,q,t,_ = readsnd(projectdir("exp","snd",expii))
+z,p,_,q,t,_ = readsnd(snddir("$(expii).snd"))
 nz = length(z)
 snddata = zeros(nz,6)
 snddata[:,1] .= z
