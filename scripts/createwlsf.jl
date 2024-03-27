@@ -4,7 +4,7 @@ using DrWatson
 include(srcdir("samsnd.jl"))
 include(srcdir("samlsf.jl"))
 
-rad = "P"
+rad = "P_FSF"
 
 z,p,_,_,_,_ = readsnd("$(rad).snd"); nz = length(z)
 
@@ -30,10 +30,8 @@ function wforcing(z,p=zeros(length(z));zbl,w₀)
 
 end
 
-printlsf(joinpath("EvM","$(rad)-w_0.50mps.lsf"),wforcing(z,p,zbl=1500,w₀=0.50),1009.32)
-printlsf(joinpath("EvM","$(rad)-w_0.40mps.lsf"),wforcing(z,p,zbl=1500,w₀=0.40),1009.32)
-printlsf(joinpath("EvM","$(rad)-w_0.30mps.lsf"),wforcing(z,p,zbl=1500,w₀=0.30),1009.32)
-printlsf(joinpath("EvM","$(rad)-w_0.20mps.lsf"),wforcing(z,p,zbl=1500,w₀=0.20),1009.32)
-printlsf(joinpath("EvM","$(rad)-w_0.10mps.lsf"),wforcing(z,p,zbl=1500,w₀=0.10),1009.32)
-printlsf(joinpath("EvM","$(rad)-w_0.05mps.lsf"),wforcing(z,p,zbl=1500,w₀=0.05),1009.32)
-printlsf(joinpath("EvM","$(rad)-w_0.00mps.lsf"),wforcing(z,p,zbl=1500,w₀=0.00),1009.32)
+for w in ([0,0.5,1,2,3,4,5]/10)
+    wstring = @sprintf("%04.2f",w)
+    fid = joinpath("EnergeticvsMechanistic",rad,"w_$(wstring)mps.lsf")
+    printlsf(fid,wforcing(z,p,zbl=1500,w₀=w),1009.32)
+end
