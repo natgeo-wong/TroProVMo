@@ -1,6 +1,6 @@
 &PARAMETERS
 
-caseid ='TroProVMo-[expname]-[runname]',
+caseid ='TroProVMo-EnergeticvsMechanistic-[runname]',
 
 dx = 2000.,
 dy = 2000.,
@@ -18,8 +18,8 @@ dodamping        = .true.,
 doupperbound     = .true.,
 docloud          = .true.,
 doprecip         = .true.,
-dolongwave       = .true.,
-doshortwave      = .true.,
+dolongwave       = .false.,
+doshortwave      = .false.,
 dosurface        = .true.,
 dodynamicocean   = .false.,
 dolargescale     = .[bool].,
@@ -51,11 +51,11 @@ nrad = 12,
 ! below values are equivalent to insolation = 423.4773 W/m2
 !   coszrs = 0.732650
 
-doperpetual     = .false.,
+doperpetual     = .true.,
 doseasons       = .false.,
 dosolarconstant = .true.,
 zenith_angle    = 0.0,
-solar_constant  = 1361.,
+solar_constant  = 431.06,
 
 doisccp = .false.,
 domodis = .false.,
@@ -83,21 +83,21 @@ rad3Dout     = .true.,
 
 &KUANG_PARAMS
 
-doradtendency = .false.,
+doradtendency = .true.,
 dobulksfcflx  = .false.,
 bulksfcflx_u  = 5.
 
-dowtg_blossey_etal_JAMES2009  = .[bool].
-dowtg_hermanraymond_JAMES2014 = .false.
+dowtg_blossey_etal_JAMES2009  = .false.
+dowtg_hermanraymond_JAMES2014 = .[bool].
 
 wtgscale_time        = 0.1
 
 am_wtg               = [am] ! momentum damping rate in day^-1, default= 1.,
 am_wtg_exp           = 0.,          ! exponent of p/p0 in momentum damping rate.
-lambda_wtg           = 1000.e3,      ! quarter wavelength in m. default = 650.e3 m
+lambda_wtg           = 650.e3,      ! quarter wavelength in m. default = 650.e3 m
 
 tau_wtg              = [tau] ! temperature relaxation in hours, default= 1.,
 dthetadz_min         = 1.e-3
-dowtgLBL             = .false.
+dowtgLBL             = .true.
 
 /

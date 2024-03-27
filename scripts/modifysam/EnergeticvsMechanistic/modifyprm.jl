@@ -6,7 +6,7 @@ using Printf
 include(srcdir("sam.jl"))
 
 schname = "DGW"
-radname = "P"
+radname = "P_FSF"
 
 if schname == "DGW"
     wtgvec = [0.01,0.02,0.05,0.1,0.2]
@@ -17,13 +17,13 @@ sstvec = collect(300.5:0.5:302)
 fsfvec = collect(10:10:50)
 wlsvec = vcat(0.05,0.1:0.1:0.5)
 
-tprm = projectdir("exp","tmp.prm")
-oprm = projectdir("run","modifysam","EvM","prmtemplates","$(schname)_$(radname).prm")
+tprm = expdir("tmp.prm")
+oprm = rundir("modifysam","EnergeticvsMechanistic","prmtemplates",schname,"$radname.prm")
 
 for wtgii in wtgvec
 
     expname = powername(wtgii,schname)
-    mkpath(projectdir("exp","prm","EvM-$(schname)_$(radname)",expname))
+    mkpath(prmdir("EnergeticvsMechanistic",schname,radname,expname))
 
     if schname == "DGW"
           wtgdmp = wtgii; wtgrlx = 1
@@ -32,12 +32,10 @@ for wtgii in wtgvec
 
     for sst in sstvec
         runname = "w_0.00mps_fsf+00Wpm2_SST$(@sprintf("%5.1f",sst))K"
-        nprm = projectdir("exp","prm","EvM-$(schname)_$(radname)",expname,"$(runname).prm")
-
+        nprm = prmdir("EnergeticvsMechanistic",schname,radname,expname,"$(runname).prm")
         open(tprm,"w") do fprm
             open(oprm,"r") do rprm
                 s = read(rprm,String)
-                s = replace(s,"[expname]" => expname)
                 s = replace(s,"[runname]" => runname)
                 s = replace(s,"[sst]" => @sprintf("%5.1f",sst))
                 s = replace(s,"[bool]" => "true")
@@ -48,24 +46,16 @@ for wtgii in wtgvec
                 write(fprm,s)
             end
         end
-        
         mv(tprm,nprm,force=true)
-        @info "Creating new prm file for EvM-$(schname)_$(radname) $expname $runname"
+        @info "Creating new prm file for EnergeticvsMechanistic $(schname) $(radname) $expname $runname"
     end
 
     for fsf in fsfvec
         runname = "w_0.00mps_fsf+$(@sprintf("%02d",fsf))Wpm2_SST300.0K"
-        nprm = projectdir("exp","prm","EvM-$(schname)_$(radname)",expname,"$(runname).prm")
-
-        if schname == "DGW"
-              wtgdmp = wtgii; wtgrlx = 1
-        else; wtgrlx = wtgii; wtgdmp = 1
-        end
-
+        nprm = prmdir("EnergeticvsMechanistic",schname,radname,expname,"$(runname).prm")
         open(tprm,"w") do fprm
             open(oprm,"r") do rprm
                 s = read(rprm,String)
-                s = replace(s,"[expname]" => expname)
                 s = replace(s,"[runname]" => runname)
                 s = replace(s,"[sst]" => @sprintf("%5.1f",300))
                 s = replace(s,"[bool]" => "true")
@@ -76,19 +66,16 @@ for wtgii in wtgvec
                 write(fprm,s)
             end
         end
-        mkpath(projectdir("exp","prm","EvM-$(schname)_$(radname)",expname))
         mv(tprm,nprm,force=true)
-        @info "Creating new prm file for EvM-$(schname)_$(radname) $expname $runname"
+        @info "Creating new prm file for EnergeticvsMechanistic $(schname) $(radname)  $expname $runname"
     end
 
     for wls in wlsvec
         runname = "w_$(@sprintf("%04.2f",wls))mps_fsf+00Wpm2_SST300.0K"
-        nprm = projectdir("exp","prm","EvM-$(schname)_$(radname)",expname,"$(runname).prm")
-
+        nprm = prmdir("EnergeticvsMechanistic",schname,radname,expname,"$(runname).prm")
         open(tprm,"w") do fprm
             open(oprm,"r") do rprm
                 s = read(rprm,String)
-                s = replace(s,"[expname]" => expname)
                 s = replace(s,"[runname]" => runname)
                 s = replace(s,"[sst]" => @sprintf("%5.1f",300))
                 s = replace(s,"[bool]" => "true")
@@ -99,9 +86,8 @@ for wtgii in wtgvec
                 write(fprm,s)
             end
         end
-        mkpath(projectdir("exp","prm","EvM-$(schname)_$(radname)",expname))
         mv(tprm,nprm,force=true)
-        @info "Creating new prm file for EvM-$(schname)_$(radname) $expname $runname"
+        @info "Creating new prm file for EnergeticvsMechanistic $(schname) $(radname)  $expname $runname"
     end
     
 end
