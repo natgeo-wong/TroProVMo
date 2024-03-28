@@ -19,6 +19,18 @@ function powername(
 
 end
 
+function wlsname(
+    wls :: Real
+)
+
+    if wls > 0
+        return "Ascendance$(@sprintf("%3.1f",abs(wls)))e-2"
+    else
+        return "Subsidence$(@sprintf("%3.1f",abs(wls)))e-2"
+    end
+
+end
+
 function fluxtq0(scheme :: AbstractString)
 
     if scheme == "P"

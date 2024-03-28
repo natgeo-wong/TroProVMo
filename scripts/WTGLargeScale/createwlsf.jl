@@ -1,6 +1,7 @@
 using DrWatson
 @quickactivate "WTGLargeScale"
 
+include(srcdir("sam.jl"))
 include(srcdir("samsnd.jl"))
 include(srcdir("samlsf.jl"))
 
@@ -57,12 +58,15 @@ schname = "DGW"
 radname = "P"
 wlsvec = vcat(-1:0.2:2); wlsvec = wlsvec[.!iszero.(wlsvec)]
 
-z,p,pt,_,_,_ = readsnd("$(radname).snd"); nz = length(z)
+z,p,pt,_,_,_ = readsnd("$(radname).snd";prjname); nz = length(z)
 ztrop,iztrop = findztrop(pt,z,p)
 
 for wls in wlsvec
 
-    lsfname = joinpath(schname,"$(wlsname(wls)).lsf")
+    lsfname = joinpath(schname,radname,"$(wlsname(wls)).lsf")
     printlsf(lsfname,wforcing(z,p,ztrop=ztrop,w₀=wls*0.01,wtg=schname),1009.32;prjname)
 
 end
+
+lsfname = joinpath("$(radname)-neutral.lsf")
+printlsf(lsfname,wforcing(z,p,ztrop=ztrop,w₀=0,wtg=schname),1009.32;prjname)
