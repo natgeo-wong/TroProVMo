@@ -37,7 +37,6 @@ for wls in wlsvec
             open(oprm,"r") do rprm
                 s = read(rprm,String)
                 s = replace(s,"[runname]" => pwrname)
-                s = replace(s,"[en]"      => "$(imember)")
                 s = replace(s,"[am]"      => @sprintf("%7e",wtgdmp))
                 s = replace(s,"[tau]"     => @sprintf("%7e",wtgrlx))
                 write(fprm,s)

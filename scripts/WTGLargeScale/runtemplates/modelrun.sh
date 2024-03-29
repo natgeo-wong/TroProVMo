@@ -22,7 +22,7 @@ module load intel/23.0.0-fasrc01 intelmpi/2021.8.0-fasrc01 netcdf-fortran/4.6.0-
 
 exproot=[exproot]
 
-prmfile=$exproot/prm/[schname]/[radname]/[runname]/[wtgname].prm
+prmfile=$exproot/prm/[schname]/[radname]/[runname]/[memberx].prm
 sndfile=$exproot/snd/[schname]/[radname]/[runname].snd
 lsffile=$exproot/lsf/[schname]/[radname]/[runname].lsf
 
