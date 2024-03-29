@@ -1,5 +1,5 @@
 using DrWatson
-@quickactivate "WTGLargeScale"
+@quickactivate "TroProVMo"
 
 include(srcdir("sam.jl"))
 include(srcdir("samsnd.jl"))

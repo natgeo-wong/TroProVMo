@@ -1,5 +1,5 @@
 using DrWatson
-@quickactivate "WTGLargeScale"
+@quickactivate "TroProVMo"
 using Printf
 
 include(srcdir("common.jl"))
@@ -34,7 +34,7 @@ for wls in wlsvec
             nstr_m = replace(nstr_m,"[radname]" => radname)
             nstr_m = replace(nstr_m,"[runname]" => runname)
             nstr_m = replace(nstr_m,"[pwrname]" => powername(wtgii,schname))
-            write(wrun,sn)
+            write(wrun,nstr_m)
         end
 
         if doBuild
@@ -43,7 +43,7 @@ for wls in wlsvec
                 nstr_b = replace(nstr_b,"[schname]" => schname)
                 nstr_b = replace(nstr_b,"[radname]" => radname)
                 nstr_b = replace(nstr_b,"[runname]" => runname)
-                write(wrun,sn)
+                write(wrun,nstr_b)
             end
         end
 

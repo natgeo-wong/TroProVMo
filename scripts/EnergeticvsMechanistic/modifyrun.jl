@@ -5,7 +5,7 @@ using Printf
 include(srcdir("common.jl"))
 include(srcdir("sam.jl"))
 
-expname = "EnergeticvsMechanistic"
+prjname = "EnergeticvsMechanistic"
 schname = "DGW"
 radname = "P_FSF"
 doBuild = true
@@ -40,7 +40,7 @@ for wtgii in wtgvec
             nstr_m = replace(nstr_m,"[runname]" => runname)
             nstr_m = replace(nstr_m,"[sndname]" => radname)
             nstr_m = replace(nstr_m,"[lsfname]" => lsfname)
-            write(wrun,sn)
+            write(wrun,nstr_m)
         end
     end
     
@@ -56,7 +56,7 @@ for wtgii in wtgvec
             nstr_m = replace(nstr_m,"[runname]" => runname)
             nstr_m = replace(nstr_m,"[sndname]" => radname)
             nstr_m = replace(nstr_m,"[lsfname]" => lsfname)
-            write(wrun,sn)
+            write(wrun,nstr_m)
         end
     end
     
@@ -73,7 +73,7 @@ for wtgii in wtgvec
             nstr_m = replace(nstr_m,"[runname]" => runname)
             nstr_m = replace(nstr_m,"[sndname]" => radname)
             nstr_m = replace(nstr_m,"[lsfname]" => lsfname)
-            write(wrun,sn)
+            write(wrun,nstr_m)
         end
     end
 
@@ -83,7 +83,7 @@ for wtgii in wtgvec
             nstr_b = replace(nstr_b,"[schname]" => schname)
             nstr_b = replace(nstr_b,"[radname]" => radname)
             nstr_b = replace(nstr_b,"[pwrname]" => pwrname)
-            write(wrun,sn)
+            write(wrun,nstr_b)
         end
     end
 
