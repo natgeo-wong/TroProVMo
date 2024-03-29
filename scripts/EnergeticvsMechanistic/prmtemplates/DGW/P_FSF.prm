@@ -35,7 +35,7 @@ tauls = 3600.,
 SFC_FLX_FXD = .true.,
 SFC_TAU_FXD = .false.,
 fluxt0 = [fluxt0],
-fluxq0 = [fluxq0].,
+fluxq0 = [fluxq0],
 
 longitude0 = 0.,
 latitude0  = 0.,
