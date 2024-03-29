@@ -31,7 +31,7 @@ function wforcing(z,p=zeros(length(z));zbl,w₀)
 
 end
 
-for w in ([0,0.5,1,2,3,4,5]/10)
+for w in vcat(0,0.1:0.1:0.5,1:5)/10
     wstring = @sprintf("%04.2f",w)
     fid = joinpath(radname,"w_$(wstring)mps.lsf")
     printlsf(fid,wforcing(z,p,zbl=1500,w₀=w),1009.32;prjname)
