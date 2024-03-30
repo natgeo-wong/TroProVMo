@@ -1,6 +1,6 @@
 &PARAMETERS
 
-caseid = 'TroProVMo-WTGLargeScale-[runname]',
+caseid = 'TroProVMo-WTGLargeScale-[expname]-[runname]',
 
 dx = 2000.,
 dy = 2000.,
@@ -22,7 +22,7 @@ dolongwave       = .false.,
 doshortwave      = .false.,
 dosurface        = .true.,
 dodynamicocean   = .false.,
-dolargescale     = .true.,
+dolargescale     = .[wtgbool].,
 doradforcing     = .false.,
 doradhomo        = .false.,
 dosfcforcing     = .false.,
@@ -85,7 +85,7 @@ doradtendency = .true.,
 dobulksfcflx  = .false.,
 bulksfcflx_u  = 5.
 
-dowtg_blossey_etal_JAMES2009  = .true.
+dowtg_blossey_etal_JAMES2009  = .[wtgbool].
 dowtg_raymondzeng_QJRMS2005   = .false.
 dowtg_hermanraymond_JAMES2014 = .false.
 dowtg_decompdgw               = .false.

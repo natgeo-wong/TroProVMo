@@ -58,7 +58,7 @@ schname = "DGW"
 radname = "P"
 wlsvec = vcat(-1:0.2:2); wlsvec = wlsvec[.!iszero.(wlsvec)]
 
-z,p,pt,_,_,_ = readsnd("$(radname).snd";prjname); nz = length(z)
+z,p,pt,_,_,_ = readsnd("$(radname).snd";prjname)
 ztrop,iztrop = findztrop(pt,z,p)
 
 for wls in wlsvec
@@ -67,6 +67,3 @@ for wls in wlsvec
     printlsf(lsfname,wforcing(z,p,ztrop=ztrop,w₀=wls*0.01,wtg=schname),1009.32;prjname)
 
 end
-
-lsfname = joinpath("$(radname)-neutral.lsf")
-printlsf(lsfname,wforcing(z,p,ztrop=ztrop,w₀=0,wtg=schname),1009.32;prjname)
