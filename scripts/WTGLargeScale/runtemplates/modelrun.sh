@@ -24,7 +24,7 @@ exproot=[exproot]
 
 prmfile=$exproot/prm/[schname]/[radname]/[runname]/[memberx].prm
 sndfile=$exproot/snd/[schname]/[radname]/[runname].snd
-lsffile=$exproot/lsf/[schname]/[radname]/[runname].lsf
+lsffile=$exproot/lsf/noforcing.lsf
 
 prmloc=./SAM/prm
 sndloc=./SAM/snd
