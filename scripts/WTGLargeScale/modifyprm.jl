@@ -41,8 +41,13 @@ for wls in wlsvec
                     s = replace(s,"[expname]" => expname)
                     s = replace(s,"[runname]" => pwrname)
                     s = replace(s,"[wtgbool]" => "true")
-                    s = replace(s,"[am]"      => @sprintf("%7e",wtgdmp))
-                    s = replace(s,"[tau]"     => @sprintf("%7e",wtgrlx))
+                    s = replace(s,"[dt]"  => @sprintf("%d",10))
+                    s = replace(s,"[am]"  => @sprintf("%7e",wtgdmp))
+                    s = replace(s,"[tau]" => @sprintf("%7e",wtgrlx))
+                    s = replace(s,"[nstop]"    => @sprintf("%d",86400/10*100))
+                    s = replace(s,"[nprint]"   => @sprintf("%d",86400/10))
+                    s = replace(s,"[nstat]"    => @sprintf("%d",86400/10/24))
+                    s = replace(s,"[nstatfrq]" => @sprintf("%d",60))
                     write(fprm,s)
                 end
             end
@@ -58,8 +63,13 @@ for wls in wlsvec
                         s = replace(s,"[expname]" => expname)
                         s = replace(s,"[runname]" => memberx)
                         s = replace(s,"[wtgbool]" => "false")
-                        s = replace(s,"[am]"      => @sprintf("%7e",1))
-                        s = replace(s,"[tau]"     => @sprintf("%7e",1))
+                        s = replace(s,"[dt]"  => @sprintf("%d",30))
+                        s = replace(s,"[am]"  => @sprintf("%7e",1))
+                        s = replace(s,"[tau]" => @sprintf("%7e",1))
+                        s = replace(s,"[nstop]"    => @sprintf("%d",86400/30*1000))
+                        s = replace(s,"[nprint]"   => @sprintf("%d",86400/30))
+                        s = replace(s,"[nstat]"    => @sprintf("%d",86400/30))
+                        s = replace(s,"[nstatfrq]" => @sprintf("%d",288))
                         write(fprm,s)
                     end
                 end
