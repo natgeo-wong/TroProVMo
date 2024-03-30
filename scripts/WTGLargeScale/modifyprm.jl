@@ -5,6 +5,7 @@ using Printf
 
 include(srcdir("common.jl"))
 include(srcdir("sam.jl"))
+include(srcdir("whadley.jl"))
 
 prjname = "WTGLargeScale"
 schname = "DGW"
@@ -24,6 +25,7 @@ for wls in wlsvec
 
     expname = wlsname(wls)
     folname = prmdir(schname,radname,expname;prjname); mkpath(folname)
+    wcoeff = whadleycoeff(wls,schname)
 
     for wtgii in wtgvec
 
@@ -44,6 +46,12 @@ for wls in wlsvec
                     s = replace(s,"[dt]"  => @sprintf("%d",10))
                     s = replace(s,"[am]"  => @sprintf("%7e",wtgdmp))
                     s = replace(s,"[tau]" => @sprintf("%7e",wtgrlx))
+                    s = replace(s,"[w0]"  => @sprintf("%5e",wls*1.e-2))
+                    s = replace(s,"[w1]"  => @sprintf("%5e",wcoeff[1]))
+                    s = replace(s,"[w2]"  => @sprintf("%5e",wcoeff[2]))
+                    s = replace(s,"[w3]"  => @sprintf("%5e",wcoeff[3]))
+                    s = replace(s,"[w4]"  => @sprintf("%5e",wcoeff[4]))
+                    s = replace(s,"[w5]"  => @sprintf("%5e",wcoeff[5]))
                     s = replace(s,"[nstop]"    => @sprintf("%d",86400/10*100))
                     s = replace(s,"[nprint]"   => @sprintf("%d",86400/10))
                     s = replace(s,"[nstat]"    => @sprintf("%d",86400/10/24))
@@ -66,6 +74,12 @@ for wls in wlsvec
                         s = replace(s,"[dt]"  => @sprintf("%d",30))
                         s = replace(s,"[am]"  => @sprintf("%7e",1))
                         s = replace(s,"[tau]" => @sprintf("%7e",1))
+                        s = replace(s,"[w0]"  => @sprintf("%5e",wls*1.e-2))
+                        s = replace(s,"[w1]"  => @sprintf("%5e",wcoeff[1]))
+                        s = replace(s,"[w2]"  => @sprintf("%5e",wcoeff[2]))
+                        s = replace(s,"[w3]"  => @sprintf("%5e",wcoeff[3]))
+                        s = replace(s,"[w4]"  => @sprintf("%5e",wcoeff[4]))
+                        s = replace(s,"[w5]"  => @sprintf("%5e",wcoeff[5]))
                         s = replace(s,"[nstop]"    => @sprintf("%d",86400/30*1000))
                         s = replace(s,"[nprint]"   => @sprintf("%d",86400/30))
                         s = replace(s,"[nstat]"    => @sprintf("%d",86400/30))
