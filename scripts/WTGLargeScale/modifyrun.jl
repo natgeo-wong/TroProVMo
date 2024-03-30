@@ -32,7 +32,7 @@ for wls in wlsvec
             pwrname = powername(wtgii,schname)
             open(joinpath(folname,"$(pwrname).sh"),"w") do wrun
                 nstr_m = replace(str_m ,"[email]" => email)
-                nstr_m = replace(str_m ,"[time]"  => "0-06:00")
+                nstr_m = replace(nstr_m,"[time]"  => "0-06:00")
                 nstr_m = replace(nstr_m,"[exproot]" => expdir(prjname))
                 nstr_m = replace(nstr_m,"[schname]" => schname)
                 nstr_m = replace(nstr_m,"[radname]" => radname)
@@ -47,7 +47,7 @@ for wls in wlsvec
                 memberx = "member$(@sprintf("%02d",imem))"
                 open(joinpath(folname,"$(memberx).sh"),"w") do wrun
                     nstr_m = replace(str_m ,"[email]"   => email)
-                    nstr_m = replace(str_m ,"[time]"  => "1-12:00")
+                    nstr_m = replace(nstr_m,"[time]"  => "1-12:00")
                     nstr_m = replace(nstr_m,"[exproot]" => expdir(prjname))
                     nstr_m = replace(nstr_m,"[schname]" => schname)
                     nstr_m = replace(nstr_m,"[radname]" => radname)
