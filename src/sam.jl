@@ -63,141 +63,106 @@ function fluxq0(
 
 end
 
-# function outstatname(
-#     scheme  :: AbstractString,
-#     expname :: AbstractString,
-#     config  :: AbstractString,
-#     ismpi      :: Bool = false,
-#     isensemble :: Bool = false,
-#     member     :: Integer = 0
-# )
+function outstatname(
+    prjname :: AbstractString,
+    schname :: AbstractString,
+    radname :: AbstractString,
+    expname :: AbstractString,
+    runname :: AbstractString,
+)
 
-#     if isensemble
-#     	  expmem = "$(expname)-member$(@sprintf("%02d",member))"
-#     else; expmem = expname
-#     end
+    fnc = datadir(
+        prjname,schname,radname,expname,"OUT_STAT",
+        "SAM_TroProVMo-$(prjname)-$(expname)-$runname.nc"
+    )
 
-#     if scheme == "RCE"
-#           iscontrol = true
-#     else; iscontrol = false
-#     end
+    return fnc
 
-#     if iscontrol
-#         fnc = datadir(joinpath(
-#     		scheme,expname,"OUT_STAT",
-#     		"$(scheme)_ExploreWTGSpace-$(expmem).nc"
-#     	))
-#     elseif ismpi
-#     	fnc = datadir(joinpath(
-#     		scheme,"Ensemble",expname,config,"OUT_STAT",
-#     		"$(scheme)_ExploreWTGSpace-$(expmem).nc"
-#     	))
-#     else
-#     	fnc = datadir(joinpath(
-#     		scheme,expname,config,"OUT_STAT",
-#     		"$(scheme)_ExploreWTGSpace-$(expmem).nc"
-#     	))
-#     end
+end
 
-#     return fnc
+function retrievedims(
+    prjname :: AbstractString,
+    schname :: AbstractString,
+    radname :: AbstractString,
+    expname :: AbstractString,
+    runname :: AbstractString,
+)
 
-# end
+    ds = NCDataset(outstatname(prjname,schname,radname,expname,runname))
+    z = ds["z"][:]
+    p = ds["p"][:]
+    t = ds["time"][:]
+    close(ds)
 
-# function retrievedims(
-#     scheme  :: AbstractString,
-#     expname :: AbstractString,
-#     config  :: AbstractString = "";
-#     ismpi      :: Bool = false,
-#     isensemble :: Bool = false,
-#     member     :: Integer=0
-# )
+    return z,p,t
 
-#     ds = NCDataset(outstatname(
-#         scheme,expname,config,
-#         ismpi,isensemble,member
-#     ))
-#     z = ds["z"][:]
-#     p = ds["p"][:]
-#     t = ds["time"][:]
-#     close(ds)
+end
 
-#     return z,p,t
+function retrievedims_fnc(fnc::AbstractString)
 
-# end
+    rce = NCDataset(fnc)
+    z = rce["z"][:]
+    p = rce["p"][:]
+    t = rce["time"][:]
+    close(rce)
 
-# function retrievedims_fnc(fnc::AbstractString)
+    return z,p,t
 
-#     rce = NCDataset(fnc)
-#     z = rce["z"][:]
-#     p = rce["p"][:]
-#     t = rce["time"][:]
-#     close(rce)
+end
 
-#     return z,p,t
+function retrieve2Dvar(
+    varname :: AbstractString,
+    prjname :: AbstractString,
+    schname :: AbstractString,
+    radname :: AbstractString,
+    expname :: AbstractString,
+    runname :: AbstractString,
+)
 
-# end
+    ds = NCDataset(outstatname(prjname,schname,radname,expname,runname))
+    var = ds[varname][:]
+    close(ds)
 
-# function retrieve2Dvar(
-#     varname :: AbstractString,
-#     scheme  :: AbstractString,
-#     expname :: AbstractString,
-#     config  :: AbstractString = "";
-#     ismpi      :: Bool = false,
-#     isensemble :: Bool = false,
-#     member     :: Integer=0
-# )
+    return var
 
-#     ds = NCDataset(outstatname(
-#         scheme,expname,config,
-#         ismpi,isensemble,member
-#     ))
-#     var = ds[varname][:]
-#     close(ds)
+end
 
-#     return var
+function retrieve2Dvar_fnc(varname::AbstractString, fnc::AbstractString)
 
-# end
+    ds = NCDataset(fnc)
+    var = ds[varname][:]
+    close(ds)
 
-# function retrieve2Dvar_fnc(varname::AbstractString, fnc::AbstractString)
+    return var
 
-#     ds = NCDataset(fnc)
-#     var = ds[varname][:]
-#     close(ds)
+end
 
-#     return var
+function retrieve3Dvar(
+    varname :: AbstractString,
+    prjname :: AbstractString,
+    schname :: AbstractString,
+    radname :: AbstractString,
+    expname :: AbstractString,
+    runname :: AbstractString,
+)
 
-# end
+    ds = NCDataset(outstatname(prjname,schname,radname,expname,runname))
+    var = ds[varname][:,:]
+    close(ds)
 
-# function retrieve3Dvar(
-#     varname :: AbstractString,
-#     scheme  :: AbstractString,
-#     expname :: AbstractString,
-#     config  :: AbstractString = "";
-#     ismpi      :: Bool = false,
-#     isensemble :: Bool = false,
-#     member     :: Integer=0
-# )
+    return var
 
-#     ds = NCDataset(outstatname(
-#         scheme,expname,config,
-#         ismpi,isensemble,member
-#     ))
-#     var = ds[varname][:,:]
-#     close(ds)
+end
 
-#     return var
+function retrieve3Dvar_fnc(varname::AbstractString, fnc::AbstractString)
 
-# end
+    ds = NCDataset(fnc)
+    var = ds[varname][:,:]
+    close(ds)
 
-# function retrieve3Dvar_fnc(varname::AbstractString, fnc::AbstractString)
+    return var
 
-#     ds = NCDataset(fnc)
-#     var = ds[varname][:,:]
-#     close(ds)
-
-#     return var
-
-# end
+end
 
 function calcrh(QV,TAIR,P)
 
