@@ -1,15 +1,17 @@
 using DrWatson
 @quickactivate "TroProVMo"
 
-using JLD2
+using Dates
+using DifferentialEquations
+using FFTW
 using ForwardDiff
+using Interpolations
+using JLD2
+using Logging
 using LinearAlgebra
 using SparseArrays
-using FFTW
-using DifferentialEquations
-using Interpolations
 
-# Demo for internal gravity wave
+@info "$(now()) - TroProVMo - Internal gravity wave calculation"
 
 # Constants
 N2 = 0.01^2  # square of buoyancy frequency, in 1/second^2
@@ -48,6 +50,7 @@ alfa *= 2 * π
 
 nalfa = nx ÷ 2 + 1
 
+@info "$(now()) - TroProVMo - Initializing Jacobian for computation ..."
 # Jacobian computation
 Jacobian = spzeros(nz*nalfa, nz*nalfa)
 for i = 2:nalfa
@@ -61,7 +64,7 @@ fullJacobian[1:(nz*nalfa),nz*nalfa.+(1:nz*nalfa)] .= I(nz*nalfa)
 # Initial condition
 y0 = zeros(2*nz*nalfa,2)
 
-# ODE system
+@info "$(now()) - TroProVMo - Initializing ODE System for computation ..."
 function ode_fun!(dydt, y, p, t)
     (nalfa, nz, Jacobian, alfa, Qt) = p
     forcing1 = zeros(nz*nalfa)
@@ -79,7 +82,7 @@ function ode_fun!(dydt, y, p, t)
 end
 
 # Setup and solve the ODE
-
+@info "$(now()) - TroProVMo - Solving the ODE computation ..."
 prob = ODEProblem(ode_fun!, y0, (0.0, T), (nalfa, nz, Jacobian, alfa, reinterpret(Float64,Q)))
 sol = solve(prob, alg_hints = [:stiff], reltol=1e-6, abstol=1e-10, saveat=3600)
 
@@ -89,6 +92,7 @@ buoy = zeros(nz,nx,length(sol.t))
 fw = zeros(ComplexF64,nz,200)
 fb = zeros(ComplexF64,nz,200)
 
+@info "$(now()) - TroProVMo - Converting output from Fourier Space to Real Space ..."
 for i in 1 : length(sol.t)
 
     fw[:,1:101] = reshape(sol.u[i][1:nz*nalfa,1], nz, nalfa) .+ im * reshape(sol.u[i][1:nz*nalfa,2], nz, nalfa)
@@ -110,4 +114,4 @@ for i in 1 : length(sol.t)
 
 end
 
-save(datadir("gravitywave.jld2");z,w,buoy)
+jldsave(datadir("gravitywave.jld2");z,w,buoy)
