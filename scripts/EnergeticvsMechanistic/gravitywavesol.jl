@@ -1,15 +1,13 @@
 using DrWatson
 @quickactivate "TroProVMo"
 
+using JLD2
 using ForwardDiff
 using LinearAlgebra
 using SparseArrays
 using FFTW
 using DifferentialEquations
 using Interpolations
-
-using PyCall, LaTeXStrings
-pplt = pyimport("proplot")
 
 # Demo for internal gravity wave
 
@@ -112,3 +110,4 @@ for i in 1 : length(sol.t)
 
 end
 
+save(datadir("gravitywave.jld2");z,w,buoy)
