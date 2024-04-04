@@ -4,9 +4,9 @@ using DrWatson
 using Dates
 using DifferentialEquations
 using FFTW
-using JLD2
 using Logging
 using LinearAlgebra
+using NCDatasets
 using SparseArrays
 
 @info "$(now()) - TroProVMo - Internal gravity wave calculation"; flush(stderr)
@@ -116,4 +116,24 @@ for i in 1 : length(sol.t)
 
 end
 
-jldsave(datadir("gravitywave.jld2");z,w,buoy)
+fnc = datadir("gravitywave.nc")
+if isfile(fnc); rm(fnc,force=true) end
+ds = NCDataset(fnc,"c")
+
+ds.dim["time"] = length(sol.t)
+ds.dim["x"]    = nx
+ds.dim["z"]    = nz
+
+nct = defVar(ds,"t",Float64,("time",))
+ncx = defVar(ds,"x",Float64,("x",))
+ncz = defVar(ds,"z",Float64,("z",))
+ncw = defVar(ds,"w",Float64,("z","x","time"))
+ncb = defVar(ds,"b",Float64,("z","x","time"))
+
+nct["t"][:] = sol.t
+ncx["x"][:] = x
+ncz["z"][:] = z
+ncw["w"][:,:,:] = w
+ncb["b"][:,:,:] = buoy
+
+close(ds)
