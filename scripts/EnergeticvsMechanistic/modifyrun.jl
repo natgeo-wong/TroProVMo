@@ -82,7 +82,7 @@ for wtgii in wtgvec
             nstr_b = replace(str_b ,"[datadir]" => datadir(prjname))
             nstr_b = replace(nstr_b,"[schname]" => schname)
             nstr_b = replace(nstr_b,"[radname]" => radname)
-            nstr_b = replace(nstr_b,"[pwrname]" => pwrname)
+            nstr_b = replace(nstr_b,"[expname]" => pwrname)
             write(wrun,nstr_b)
         end
     end

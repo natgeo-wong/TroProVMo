@@ -35,10 +35,12 @@ end
 
 function fluxtq0(scheme :: AbstractString)
 
-    if scheme == "P"
+    if scheme == "P_FSF"
         return [10.,90.]
-    else
+    elseif scheme == "T_FSF"
         return [20.,120.]
+    else # for non fixed-surface fluxes, dummy vector of ones
+        return [1.,1.]
     end
 
 end
