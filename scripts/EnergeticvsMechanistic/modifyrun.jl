@@ -17,7 +17,7 @@ else
     wtgvec = [0.2,0.5,1,2]
 end
 sstvec = collect(300:0.5:305)
-wlsvec = vcat(0,0.1:0.1:1)/10
+wlsvec = vcat(0:0.1:1)/10
 
 mfid = open(runtemplatedir("modelrun.sh";prjname),"r"); str_m = read(mfid,String)
 bfid = open(runtemplatedir("Build.csh";  prjname),"r"); str_b = read(bfid,String)

@@ -16,7 +16,7 @@ else
     wtgvec = [0.2,0.5,1,2]
 end
 sstvec = collect(300:0.5:305)
-wlsvec = vcat(0,0.1:0.1:1)/10
+wlsvec = vcat(0:0.1:1)/10
 
 oprm = prmtemplatedir(schname,"$radname.prm";prjname)
 
