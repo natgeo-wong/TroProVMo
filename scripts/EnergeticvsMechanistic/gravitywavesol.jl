@@ -15,7 +15,7 @@ using SparseArrays
 N2 = 0.01^2  # square of buoyancy frequency, in 1/second^2
 L = 40e6     # horizontal domain size, in m
 H = 20e3      # model top height, in m
-T = 10 * 86400  # integration time, in seconds
+T = 20 * 86400  # integration time, in seconds
 
 # Grid settings
 nx = 200; const nz = 400
@@ -91,14 +91,14 @@ sol = solve(prob, alg_hints = [:stiff], reltol=1e-6, abstol=1e-10, saveat=3600)
 w = zeros(nz,nx,length(sol.t))
 buoy = zeros(nz,nx,length(sol.t))
 
-fw = zeros(ComplexF64,nz,200)
-fb = zeros(ComplexF64,nz,200)
+fw = zeros(ComplexF64,nz,nx)
+fb = zeros(ComplexF64,nz,nx)
 
 @info "$(now()) - TroProVMo - Converting output from Fourier Space to Real Space ..."; flush(stderr)
 for i in 1 : length(sol.t)
 
-    fw[:,1:101] = reshape(sol.u[i][1:nz*nalfa,1], nz, nalfa) .+ im * reshape(sol.u[i][1:nz*nalfa,2], nz, nalfa)
-    fb[:,1:101] = -reshape(sol.u[i][nz*nalfa+1:2*nz*nalfa,1], nz, nalfa) .- im * reshape(sol.u[i][nz*nalfa+1:2*nz*nalfa,2], nz, nalfa)
+    fw[:,1:nalfa] = reshape(sol.u[i][1:nz*nalfa,1], nz, nalfa) .+ im * reshape(sol.u[i][1:nz*nalfa,2], nz, nalfa)
+    fb[:,1:nalfa] = -reshape(sol.u[i][nz*nalfa+1:2*nz*nalfa,1], nz, nalfa) .- im * reshape(sol.u[i][nz*nalfa+1:2*nz*nalfa,2], nz, nalfa)
     fb[:,2:nalfa] = fb[:, 2:nalfa] ./ (alfac[2:nalfa] .^ 2)'  # Broadcasting operation
 
     for j in (nalfa+1):nx
