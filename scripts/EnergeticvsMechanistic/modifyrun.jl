@@ -46,7 +46,7 @@ for wtgii in wtgvec
 
     for sst in sstvec
         runname = "SST$(@sprintf("%5.1f",sst))K"
-        lsfname = joinpath(radname,"w_$(wlsname)mps")
+        lsfname = joinpath(radname,"w_0.000mps")
         open(joinpath(folname,"$(runname).sh"),"w") do wrun
             nstr_m = replace(str_m ,"[email]"   => email)
             nstr_m = replace(nstr_m,"[exproot]" => expdir(prjname))
@@ -55,7 +55,7 @@ for wtgii in wtgvec
             nstr_m = replace(nstr_m,"[pwrname]" => pwrname)
             nstr_m = replace(nstr_m,"[runname]" => runname)
             nstr_m = replace(nstr_m,"[sndname]" => radname)
-            nstr_m = replace(nstr_m,"[lsfname]" => "w_0.000mps")
+            nstr_m = replace(nstr_m,"[lsfname]" => lsfname)
             write(wrun,nstr_m)
         end
     end
