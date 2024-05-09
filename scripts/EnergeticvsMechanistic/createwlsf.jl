@@ -7,7 +7,7 @@ include(srcdir("samsnd.jl"))
 include(srcdir("samlsf.jl"))
 
 prjname = "EnergeticvsMechanistic"
-radname = "P_FSF"
+radname = "P"
 
 z,p,_,_,_,_ = readsnd("$(radname).snd";prjname); nz = length(z)
 
@@ -15,7 +15,7 @@ function wforcing(z,p=zeros(length(z));w₀)
 
     ds  = NCDataset(datadir("gravitywave.nc"))
 	zi	= ds["z"][:]
-	wi 	= ds["w"][:,:,:]
+	wi 	= ds["w"][:,101:102,(end-20):end]
 	close(ds)
 
     itp = interpolate(zi,wi)
