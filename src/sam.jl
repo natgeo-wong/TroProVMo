@@ -24,11 +24,11 @@ function wlsname(
 )
 
     if wls > 0
-        return "uplift$(@sprintf("%3.1f",abs(wls)))e-2"
+        return "uplift$(@sprintf("%4.2f",abs(wls)))e-2"
     elseif wls < 0
-        return "subside$(@sprintf("%3.1f",abs(wls)))e-2"
+        return "subside$(@sprintf("%4.2f",abs(wls)))e-2"
     else
-        return "neutral$(@sprintf("%3.1f",0))e-2"
+        return "neutral$(@sprintf("%4.2f",0))e-2"
     end
 
 end
