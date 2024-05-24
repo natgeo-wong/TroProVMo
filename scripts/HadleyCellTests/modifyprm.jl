@@ -8,16 +8,9 @@ include(srcdir("sam.jl"))
 include(srcdir("whadley.jl"))
 
 prjname = "WTGLargeScale"
-schname = "DGW"
 radname = "P"
 
-if schname == "DGW"
-    wtgvec = [0,0.02,0.05,0.1,0.2,0.5,1,2,5,10,20,50]
-else
-    wtgvec = [sqrt(2),2,2*sqrt(2.5),5,5*sqrt(2)]
-    wtgvec = vcat(0,wtgvec/10,1,wtgvec)
-end
-wlsvec = vcat(-1:0.2:2); wlsvec = wlsvec[.!iszero.(wlsvec)]
+wlsvec = vcat(-0.5:0.1:1); wlsvec = wlsvec[.!iszero.(wlsvec)]
 
 oprm = rundir("prmtemplates",schname,"$(radname).prm";prjname)
 
@@ -47,11 +40,6 @@ for wls in wlsvec
                     s = replace(s,"[am]"  => @sprintf("%7e",wtgdmp))
                     s = replace(s,"[tau]" => @sprintf("%7e",wtgrlx))
                     s = replace(s,"[w0]"  => @sprintf("%5e",wls*1.e-2))
-                    s = replace(s,"[w1]"  => @sprintf("%5e",wcoeff[1]))
-                    s = replace(s,"[w2]"  => @sprintf("%5e",wcoeff[2]))
-                    s = replace(s,"[w3]"  => @sprintf("%5e",wcoeff[3]))
-                    s = replace(s,"[w4]"  => @sprintf("%5e",wcoeff[4]))
-                    s = replace(s,"[w5]"  => @sprintf("%5e",wcoeff[5]))
                     s = replace(s,"[htime]"    => @sprintf("%4.2f",0))
                     s = replace(s,"[nstop]"    => @sprintf("%d",86400/10*100))
                     s = replace(s,"[nprint]"   => @sprintf("%d",86400/10))
