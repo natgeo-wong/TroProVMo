@@ -5,8 +5,7 @@ using Printf
 include(srcdir("common.jl"))
 include(srcdir("sam.jl"))
 
-prjname = "WTGLargeScale"
-schname = "DGW"
+prjname = "HadleyCellTests"
 radname = "P"
 email   = ""
 doBuild = true
@@ -24,52 +23,47 @@ bfid = open(runtemplatedir("Build.csh";  prjname),"r"); str_b = read(bfid,String
 
 for wls in wlsvec
     runname = wlsname(wls)
-    folname = rundir(schname,radname,runname;prjname)
-    for wtgii in wtgvec
 
-        if !iszero(wtgii)
-
-            pwrname = powername(wtgii,schname)
-            open(joinpath(folname,"$(pwrname).sh"),"w") do wrun
-                nstr_m = replace(str_m ,"[email]" => email)
-                nstr_m = replace(nstr_m,"[time]"  => "0-06:00")
-                nstr_m = replace(nstr_m,"[exproot]" => expdir(prjname))
-                nstr_m = replace(nstr_m,"[schname]" => schname)
-                nstr_m = replace(nstr_m,"[radname]" => radname)
-                nstr_m = replace(nstr_m,"[runname]" => runname)
-                nstr_m = replace(nstr_m,"[memberx]" => pwrname)
-                write(wrun,nstr_m)
-            end
-
-        else
-
-            for imem = 1 : 5
-                memberx = "member$(@sprintf("%02d",imem))"
-                open(joinpath(folname,"$(memberx).sh"),"w") do wrun
-                    nstr_m = replace(str_m ,"[email]"   => email)
-                    nstr_m = replace(nstr_m,"[time]"  => "1-12:00")
-                    nstr_m = replace(nstr_m,"[exproot]" => expdir(prjname))
-                    nstr_m = replace(nstr_m,"[schname]" => schname)
-                    nstr_m = replace(nstr_m,"[radname]" => radname)
-                    nstr_m = replace(nstr_m,"[runname]" => runname)
-                    nstr_m = replace(nstr_m,"[memberx]" => memberx)
-                    write(wrun,nstr_m)
-                end
-            end
-
-        end
-
-        if doBuild
-            open(joinpath(folname,"Build.csh"),"w") do wrun
-                nstr_b = replace(str_b ,"[datadir]" => datadir(prjname))
-                nstr_b = replace(nstr_b,"[schname]" => schname)
-                nstr_b = replace(nstr_b,"[radname]" => radname)
-                nstr_b = replace(nstr_b,"[runname]" => runname)
-                write(wrun,nstr_b)
-            end
-        end
-
+    folname = rundir("DE2019Advection",radname;prjname)
+    open(joinpath(folname,"$(memberx).sh"),"w") do wrun
+        nstr_m = replace(str_m ,"[email]"   => email)
+        nstr_m = replace(nstr_m,"[time]"  => "1-12:00")
+        nstr_m = replace(nstr_m,"[exproot]" => expdir(prjname))
+        nstr_m = replace(nstr_m,"[expname]" => "DE2019Advection")
+        nstr_m = replace(nstr_m,"[radname]" => radname)
+        nstr_m = replace(nstr_m,"[runname]" => runname)
+        write(wrun,nstr_m)
     end
+
+    if doBuild
+        open(joinpath(folname,"Build.csh"),"w") do wrun
+            nstr_b = replace(str_b ,"[datadir]" => datadir(prjname))
+            nstr_b = replace(nstr_b,"[expname]" => "DE2019Advection")
+            nstr_b = replace(nstr_b,"[radname]" => radname)
+            write(wrun,nstr_b)
+        end
+    end
+
+    folname = rundir("FullSubsidence",radname;prjname)
+    open(joinpath(folname,"$(memberx).sh"),"w") do wrun
+        nstr_m = replace(str_m ,"[email]"   => email)
+        nstr_m = replace(nstr_m,"[time]"  => "1-12:00")
+        nstr_m = replace(nstr_m,"[exproot]" => expdir(prjname))
+        nstr_m = replace(nstr_m,"[expname]" => "FullSubsidence")
+        nstr_m = replace(nstr_m,"[radname]" => radname)
+        nstr_m = replace(nstr_m,"[runname]" => runname)
+        write(wrun,nstr_m)
+    end
+
+    if doBuild
+        open(joinpath(folname,"Build.csh"),"w") do wrun
+            nstr_b = replace(str_b ,"[datadir]" => datadir(prjname))
+            nstr_b = replace(nstr_b,"[expname]" => "FullSubsidence")
+            nstr_b = replace(nstr_b,"[radname]" => radname)
+            write(wrun,nstr_b)
+        end
+    end
+
 end
 
 close(mfid)

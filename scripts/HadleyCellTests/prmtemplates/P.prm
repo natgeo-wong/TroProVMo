@@ -4,7 +4,7 @@ caseid = 'TroProVMo-WTGLargeScale-[expname]-[runname]',
 
 dx = 2000.,
 dy = 2000.,
-dt = [dt].,
+dt = 30.,
 
 nrestart      = 0,
 nrestart_skip = 239,
@@ -59,10 +59,10 @@ doisccp = .false.,
 domodis = .false.,
 domisr  = .false.,
 
-nstop    = [nstop],
-nprint   = [nprint],
-nstat    = [nstat],     ! Calculate statistics every hour!
-nstatfrq = [nstatfrq],     ! Collect 60 samples per statistical calculation (every 1 minute)
+nstop    = 288000,
+nprint   = 2880,
+nstat    = 2880,    ! Calculate statistics every hour!
+nstatfrq = 288,     ! Collect 60 samples per statistical calculation (every 1 minute)
 
 doSAMconditionals     = .false.,
 dosatupdnconditionals = .false.,
@@ -84,8 +84,8 @@ rad3Dout     = .true.,
 doradtendency = .false.,
 
 dohadley            = .true.
-dodrivenequilibrium = [doDE]
+dodrivenequilibrium = .[doDE].
 hadscale_time       = 0.
-whadmax             = [w0]
+whadmax             = [wmax]
 
 /
