@@ -19,7 +19,7 @@ for wls in wlsvec
     runname = wlsname(wls)
 
     folname = rundir("DE2019Advection",radname;prjname)
-    open(joinpath(folname,"$(memberx).sh"),"w") do wrun
+    open(joinpath(folname,"$runname.sh"),"w") do wrun
         nstr_m = replace(str_m ,"[email]"   => email)
         nstr_m = replace(nstr_m,"[exproot]" => expdir(prjname))
         nstr_m = replace(nstr_m,"[expname]" => "DE2019Advection")
@@ -38,7 +38,7 @@ for wls in wlsvec
     end
 
     folname = rundir("FullSubsidence",radname;prjname)
-    open(joinpath(folname,"$(memberx).sh"),"w") do wrun
+    open(joinpath(folname,"$runname.sh"),"w") do wrun
         nstr_m = replace(str_m ,"[email]"   => email)
         nstr_m = replace(nstr_m,"[exproot]" => expdir(prjname))
         nstr_m = replace(nstr_m,"[expname]" => "FullSubsidence")
