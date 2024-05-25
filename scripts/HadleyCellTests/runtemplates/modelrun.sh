@@ -40,26 +40,26 @@ echo SAM > CaseName
 
 cd ./OUT_3D
 
-for fcom3D in *[memberx]*.com3D
+for fcom3D in *[runname]*.com3D
 do
     rm "$fcom3D"
 done
 
-for fcom2D in *[memberx]*.com2D
+for fcom2D in *[runname]*.com2D
 do
     rm "$fcom2D"
 done
 
 cd ../OUT_2D
 
-for f2Dcom in *[memberx]*.2Dcom
+for f2Dcom in *[runname]*.2Dcom
 do
     rm "$f2Dcom"
 done
 
 cd ../OUT_STAT
 
-for fstat in *[memberx]*.stat
+for fstat in *[runname]*.stat
 do
     rm "$fstat"
 done
@@ -77,7 +77,7 @@ echo SAM stopped with exit status $exitstatus
 
 cd ./OUT_3D
 
-for fcom3D in *[memberx]*.com3D
+for fcom3D in *[runname]*.com3D
 do
     if com3D2nc "$fcom3D" >& /dev/null
     then
@@ -88,7 +88,7 @@ do
     fi
 done
 
-for fcom2D in *[memberx]*.com2D
+for fcom2D in *[runname]*.com2D
 do
     if com2D2nc "$fcom2D" >& /dev/null
     then
@@ -101,7 +101,7 @@ done
 
 cd ../OUT_2D
 
-for f2Dcom in *[memberx]*.2Dcom
+for f2Dcom in *[runname]*.2Dcom
 do
     if 2Dcom2nc "$f2Dcom" >& /dev/null
     then
@@ -114,7 +114,7 @@ done
 
 cd ../OUT_STAT
 
-for fstat in *[memberx]*.stat
+for fstat in *[runname]*.stat
 do
     if stat2nc "$fstat" >& /dev/null
     then
