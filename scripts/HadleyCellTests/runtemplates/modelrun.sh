@@ -8,7 +8,7 @@
 #SBATCH -N 2 # number of nodes
 #SBATCH -n 64 # number of cores
 #SBATCH --mem-per-cpu=500 # memory pool for each core
-#SBATCH -t [time] # time (D-HH:MM)
+#SBATCH -t 0-06:00 # time (D-HH:MM)
 
 ##SBATCH --account=linz_lab
 #SBATCH -J "SAM_WTG"
@@ -22,8 +22,8 @@ module load intel/23.0.0-fasrc01 intelmpi/2021.8.0-fasrc01 netcdf-fortran/4.6.0-
 
 exproot=[exproot]
 
-prmfile=$exproot/prm/[schname]/[radname]/[runname]/[memberx].prm
-sndfile=$exproot/snd/[schname]/[radname]/[runname].snd
+prmfile=$exproot/prm/[expname]/[radname]/[runname].prm
+sndfile=$exproot/snd/[expname]/[radname].snd
 lsffile=$exproot/lsf/noforcing.lsf
 
 prmloc=./SAM/prm
