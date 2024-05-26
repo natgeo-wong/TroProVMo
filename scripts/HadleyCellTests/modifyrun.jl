@@ -10,7 +10,7 @@ radname = "P"
 email   = ""
 doBuild = true
 
-wlsvec = vcat(-0.5:0.05:0,0:0.5:10); wlsvec = wlsvec[.!iszero.(wlsvec)]
+wlsvec = vcat(-1:0.05:0,0:0.1:5); wlsvec = wlsvec[.!iszero.(wlsvec)]
 
 mfid = open(runtemplatedir("modelrun.sh";prjname),"r"); str_m = read(mfid,String)
 bfid = open(runtemplatedir("Build.csh";  prjname),"r"); str_b = read(bfid,String)

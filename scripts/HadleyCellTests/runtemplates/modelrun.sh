@@ -3,7 +3,7 @@
 ##SBATCH -p test         # short jobs, time limit 8 hours
 ##SBATCH -p huce_cascade # default, moderate, no time limit
 ##SBATCH -p huce_ice     # expensive, faster, no time limit
-##SBATCH -p shared       # longer jobs, 7 days, use only when needed
+##SBATCH -p sapphire     # longer jobs, 7 days, use only when needed
 
 #SBATCH -N 2 # number of nodes
 #SBATCH -n 64 # number of cores
@@ -11,7 +11,7 @@
 #SBATCH -t 0-06:00 # time (D-HH:MM)
 
 ##SBATCH --account=linz_lab
-#SBATCH -J "SAM_WTG"
+#SBATCH -J "HadleyCellTest"
 #SBATCH --mail-user=[email]
 #SBATCH --mail-type=ALL
 #SBATCH -o ./LOGS/samrun.%j.out # STDOUT

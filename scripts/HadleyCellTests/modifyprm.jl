@@ -10,7 +10,7 @@ include(srcdir("whadley.jl"))
 prjname = "HadleyCellTests"
 radname = "P"
 
-wlsvec = vcat(-0.5:0.05:0,0:0.5:10); wlsvec = wlsvec[.!iszero.(wlsvec)]
+wlsvec = vcat(-1:0.05:0,0:0.1:5); wlsvec = wlsvec[.!iszero.(wlsvec)]
 oprm = rundir("prmtemplates","$(radname).prm";prjname)
 
 for wls in wlsvec
