@@ -8,7 +8,7 @@
 #SBATCH -N 2 # number of nodes
 #SBATCH -n 64 # number of cores
 #SBATCH --mem-per-cpu=500 # memory pool for each core
-#SBATCH -t 0-06:00 # time (D-HH:MM)
+#SBATCH -t 0-14:00 # time (D-HH:MM)
 
 ##SBATCH --account=linz_lab
 #SBATCH -J "HadleyCellTest"
