@@ -54,7 +54,7 @@ for wtgii in wtgvec
             open(oprm,"r") do rprm
                 s = read(rprm,String)
                 s = replace(s,"[runname]" => runname)
-                s = replace(s,"[sst]" => @sprintf("%5.1f",sst))
+                s = replace(s,"[sst]" => @sprintf("%5.1f",300))
                 s = replace(s,"[bool]" => "true")
                 s = replace(s,"[am]"  => @sprintf("%7e",wtgdmp))
                 s = replace(s,"[tau]" => @sprintf("%7e",wtgrlx))
