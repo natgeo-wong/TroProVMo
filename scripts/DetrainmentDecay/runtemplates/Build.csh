@@ -2,31 +2,29 @@
 
 # specify the scratch directory where object files as well as
 # restart and large output data file will be located :
-
-#setenv SAM_SCR `pwd`
-setenv SAM_SCR [datadir]/[expname]/[radname]
+setenv SAM_SCR [datadir]/[schname]/[radname]/[expname]
 
 # ----------------------------------
 # specify scalar-advection directory in SRC
 setenv ADV_DIR ADV_UM5
-#setenv ADV_DIR ADV_MPDATA
-#setenv ADV_DIR ADV_SELPPM
+# setenv ADV_DIR ADV_MPDATA
+# setenv ADV_DIR ADV_SELPPM
 
 # specify SGS directory in SRC
 setenv SGS_DIR SGS_TKE
 
 # specify radiation directory in SRC
-#setenv RAD_DIR RAD_CAM
+# setenv RAD_DIR RAD_CAM
 setenv RAD_DIR RAD_RRTM
-#setenv RAD_DIR RAD_RRTM4PBL
+# setenv RAD_DIR RAD_RRTM4PBL
 
 # specify microphysics directory in SRC
 setenv MICRO_DIR MICRO_SAM1MOM
-#setenv MICRO_DIR MICRO_M2005
-#setenv MICRO_DIR MICRO_WRF # This is Thompson et al (2008)
-#setenv MICRO_DIR MICRO_DRIZZLE
-#setenv MICRO_DIR MICRO_P3
-#setenv MICRO_DIR MICRO_THOM
+# setenv MICRO_DIR MICRO_M2005
+# setenv MICRO_DIR MICRO_WRF # This is Thompson et al (2008)
+# setenv MICRO_DIR MICRO_DRIZZLE
+# setenv MICRO_DIR MICRO_P3
+# setenv MICRO_DIR MICRO_THOM
 
 # ----------------------------------
 # specify (GNU) make utility
@@ -42,7 +40,7 @@ setenv GNUMAKE 'make -j8'
 
 setenv SAM_DIR  `pwd`
 setenv SAM_OBJ  $SAM_SCR/OBJ
-#setenv SAM_SRC  `pwd`/SRC
+# setenv SAM_SRC  `pwd`/SRC
 setenv SAM_SRC  /n/home07/nwong/SAM/SRC_v6.11
 
 if !(-d $SAM_SCR) mkdir -p $SAM_SCR

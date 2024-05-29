@@ -3,15 +3,15 @@
 ##SBATCH -p test         # short jobs, time limit 8 hours
 ##SBATCH -p huce_cascade # default, moderate, no time limit
 ##SBATCH -p huce_ice     # expensive, faster, no time limit
-##SBATCH -p sapphire     # longer jobs, 7 days, use only when needed
+##SBATCH -p shared       # longer jobs, 7 days, use only when needed
 
 #SBATCH -N 2 # number of nodes
 #SBATCH -n 64 # number of cores
 #SBATCH --mem-per-cpu=500 # memory pool for each core
-#SBATCH -t 0-14:00 # time (D-HH:MM)
+#SBATCH -t 0-12:00 # time (D-HH:MM)
 
 ##SBATCH --account=linz_lab
-#SBATCH -J "HadleyCellTest"
+#SBATCH -J "SAM_WTG"
 #SBATCH --mail-user=[email]
 #SBATCH --mail-type=ALL
 #SBATCH -o ./LOGS/samrun.%j.out # STDOUT
@@ -22,9 +22,9 @@ module load intel/23.0.0-fasrc01 intelmpi/2021.8.0-fasrc01 netcdf-fortran/4.6.0-
 
 exproot=[exproot]
 
-prmfile=$exproot/prm/[expname]/[radname]/[runname].prm
-sndfile=$exproot/snd/[expname]/[radname].snd
-lsffile=$exproot/lsf/noforcing.lsf
+prmfile=$exproot/prm/[schname]/[radname]/[pwrname]/[runname].prm
+sndfile=$exproot/snd/[radname].snd
+lsffile=$exproot/lsf/[lsfname].lsf
 
 prmloc=./SAM/prm
 sndloc=./SAM/snd

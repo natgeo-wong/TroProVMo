@@ -1,10 +1,10 @@
 &PARAMETERS
 
-caseid = 'TroProVMo-HadleyCellTests-[expname]-[runname]',
+caseid ='TroProVMo-DetrainmentDecay-[runname]',
 
 dx = 2000.,
 dy = 2000.,
-dt = 30.,
+dt = 10.,
 
 nrestart      = 0,
 nrestart_skip = 239,
@@ -22,7 +22,7 @@ dolongwave       = .true.,
 doshortwave      = .true.,
 dosurface        = .true.,
 dodynamicocean   = .false.,
-dolargescale     = .true.,
+dolargescale     = .[bool].,
 doradforcing     = .false.,
 doradhomo        = .false.,
 dosfcforcing     = .false.,
@@ -38,7 +38,7 @@ SFC_TAU_FXD = .false.,
 longitude0 = 0.,
 latitude0  = 0.,
 day0       = 0.,
-tabs_s     = 300.,
+tabs_s     = [sst],
 Szero      = 0,
 
 depth_slab_ocean = 1.,
@@ -49,20 +49,20 @@ nrad = 12,
 ! below values are equivalent to insolation = 423.4773 W/m2
 !   coszrs = 0.732650
 
-doperpetual     = .false.,
+doperpetual     = .true.,
 doseasons       = .false.,
 dosolarconstant = .true.,
 zenith_angle    = 0.0,
-solar_constant  = 1361.,
+solar_constant  = 431.06,
 
 doisccp = .false.,
 domodis = .false.,
 domisr  = .false.,
 
-nstop    = 2880000,
-nprint   = 2880,
-nstat    = 2880,    ! Calculate statistics every hour!
-nstatfrq = 288,     ! Collect 60 samples per statistical calculation (every 1 minute)
+nstop    = 864000,
+nprint   = 8640,
+nstat    = 360,     ! Calculate statistics every hour!
+nstatfrq = 60,     ! Collect 60 samples per statistical calculation (every 1 minute)
 
 doSAMconditionals     = .false.,
 dosatupdnconditionals = .false.,
@@ -82,10 +82,20 @@ rad3Dout     = .true.,
 &KUANG_PARAMS
 
 doradtendency = .false.,
+dobulksfcflx  = .false.,
+bulksfcflx_u  = 5.
 
-dohadley            = .true.
-dodrivenequilibrium = .[doDE].
-hadscale_time       = 0.
-whadmax             = [wmax]
+dowtg_blossey_etal_JAMES2009  = .[bool].
+dowtg_hermanraymond_JAMES2014 = .false.
+
+wtgscale_time        = 0.1
+
+am_wtg               = [am] ! momentum damping rate in day^-1, default= 1.,
+am_wtg_exp           = 0.,          ! exponent of p/p0 in momentum damping rate.
+lambda_wtg           = 1000.e3,      ! quarter wavelength in m. default = 650.e3 m
+
+tau_wtg              = [tau] ! temperature relaxation in hours, default= 1.,
+dthetadz_min         = 1.e-3
+dowtgLBL             = .false.
 
 /
