@@ -5,6 +5,7 @@ authors = ["Nathanael Wong <natgeo.wong@outlook.com>"]
 CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
 Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
 DifferentialEquations = "0c46a032-eb83-5123-abaf-570d42b7fbaa"
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
 DrWatson = "634d3b9d-ee7a-5ddf-bec9-22491ea816e1"
 ERA5Reanalysis = "99c076f5-c00e-46eb-a0bd-7ba31777c146"
 FFTW = "7a1cc6ca-52ef-59f5-83cd-3a7055c09341"
