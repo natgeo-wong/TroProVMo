@@ -15,8 +15,8 @@ if schname == "DGW"
 else
     wtgvec = [0.2,0.5,1,2]
 end
-sstvec = collect(300:0.1:305)
-wlsvec = vcat(0:0.02:1)/10
+wlsvec = vcat(0:0.1:0.5)/10
+zdvec  = vcat(2:15)
 
 oprm = prmtemplatedir(schname,"$radname.prm";prjname)
 
@@ -30,29 +30,15 @@ for wtgii in wtgvec
     else; wtgrlx = wtgii; wtgdmp = 1
     end
 
-    for wls in wlsvec
-        runname = "w_$(@sprintf("%05.3f",wls))mps"
+    for wls in wlsvec, zd in zdvec
+        wlsname = @sprintf("%05.3f",wls)
+        zdname  = @sprintf("%02d",zd)
+        runname = "w$(wlsname)mps_zdecay$(zdname)km"
         open(joinpath(folname,"$(runname).prm"),"w") do fprm
             open(oprm,"r") do rprm
                 s = read(rprm,String)
                 s = replace(s,"[runname]" => runname)
                 s = replace(s,"[sst]" => @sprintf("%5.1f",300))
-                s = replace(s,"[bool]" => "true")
-                s = replace(s,"[am]"  => @sprintf("%7e",wtgdmp))
-                s = replace(s,"[tau]" => @sprintf("%7e",wtgrlx))
-                write(fprm,s)
-            end
-        end
-        @info "Creating new prm file for $prjname $schname $radname $pwrname $runname"
-    end
-
-    for sst in sstvec
-        runname = "SST$(@sprintf("%5.1f",sst))K"
-        open(joinpath(folname,"$(runname).prm"),"w") do fprm
-            open(oprm,"r") do rprm
-                s = read(rprm,String)
-                s = replace(s,"[runname]" => runname)
-                s = replace(s,"[sst]" => @sprintf("%5.1f",sst))
                 s = replace(s,"[bool]" => "true")
                 s = replace(s,"[am]"  => @sprintf("%7e",wtgdmp))
                 s = replace(s,"[tau]" => @sprintf("%7e",wtgrlx))
