@@ -15,8 +15,8 @@ if schname == "DGW"
 else
     wtgvec = [0.2,0.5,1,2]
 end
-wlsvec = vcat(0:0.1:0.5)/10
-zdvec  = vcat(2:15)
+wlsvec = vcat(0:0.1:5)/10
+zdvec  = [2,5,10]
 
 oprm = prmtemplatedir(schname,"$radname.prm";prjname)
 

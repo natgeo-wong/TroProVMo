@@ -2,7 +2,7 @@ using DrWatson
 @quickactivate "TroProVMo"
 
 include(srcdir("sam.jl"))
-include(srcdir("extract.jl"))
+include(srcdir("extractw_DD.jl"))
 
 schname = "DGW"
 radname = "P"
