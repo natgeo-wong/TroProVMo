@@ -8,11 +8,11 @@ using Trapz
 
 function createflist()
 
-    wlsvec = vcat(0.1:0.1:5)/10; nw = length(wlsvec)
+    wlsvec = vcat(0.1:0.1:0.5,1:0.5:5)/10; nw = length(wlsvec)
     zdvec  = [2,5,10]; nzd = length(zdvec)
-    flist = Vector{String}(undef,nw,nzd)
+    flist = Array{String,2}(undef,nw,nzd)
     for izd in 1 : nzd, iw in 1 : nw
-        flist[iw,izd] = "w$(@sprintf("%05.3f",w))mps_zdecay$(@sprintf("%02d",zd))km"
+        flist[iw,izd] = "w$(@sprintf("%05.3f",wlsvec[iw]))mps_zdecay$(@sprintf("%02d",zdvec[izd]))km"
     end
 
     return wlsvec,zdvec,flist
@@ -42,8 +42,8 @@ function extractw(
     for iz in 1 : nz, iw in 1 : nw
 
         fnc = datadir(
-            "EnergeticvsMechanistic","$schname","$radname","$expname","OUT_STAT",
-            "SAM_TroProVMo-EnergeticvsMechanistic-$(flist[iw,iz]).nc"
+            "DetrainmentDecay","$schname","$radname","$expname","OUT_STAT",
+            "SAM_TroProVMo-DetrainmentDecay-$(flist[iw,iz]).nc"
         )
         if isfile(fnc)
             ods = NCDataset(fnc)
@@ -99,7 +99,7 @@ function extractw(
         "full_name" => "vertical_velocity_perturbation"
     ))
 
-    ncz = defVar(nds,"zdecay",Float64,("zdecay",),attrib = Dict(
+    nczd = defVar(nds,"zdecay",Float64,("zdecay",),attrib = Dict(
         "units"     => "m",
         "full_name" => "vertical_velocity_decay_height"
     ))
@@ -148,16 +148,16 @@ function extractw(
 
     nctime[:] = t
     ncz[:] = dropdims(mean(z,dims=(2,3)),dims=(2,3))
-    ncp[:] = p
+    ncp[:,:,:] = p
     ncw[:] = wlsvec
-    ncz[:] = zdvec * 1000
-    ncwwtg[:,:,:] = wwtg
-    ncwobs[:,:,:] = wobs
-    ncwls[:,:,:]  = wls
-    ncωwtg[:,:,:] = - wwtg .* 9.81 .* rho
-    ncωobs[:,:,:] = - wobs .* 9.81 .* rho
-    ncωls[:,:,:]  = - wls  .* 9.81 .* rho
-    ncrho[:,:,:]  = rho
+    nczd[:] = zdvec * 1000
+    ncwwtg[:,:,:,:] = wwtg
+    ncwobs[:,:,:,:] = wobs
+    ncwls[:,:,:,:]  = wls
+    ncωwtg[:,:,:,:] = - wwtg .* 9.81 .* rho
+    ncωobs[:,:,:,:] = - wobs .* 9.81 .* rho
+    ncωls[:,:,:,:]  = - wls  .* 9.81 .* rho
+    ncrho[:,:,:,:]  = rho
 
     close(nds)
 
