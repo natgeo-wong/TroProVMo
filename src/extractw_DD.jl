@@ -8,7 +8,8 @@ using Trapz
 
 function createflist()
 
-    wlsvec = vcat(0.1:0.1:0.5,1:0.5:5)/10; nw = length(wlsvec)
+    wlsvec = vcat(0.1:0.1:5)/10; nw = length(wlsvec)
+    # wlsvec = vcat(0.1:0.1:0.5,1:0.5,3)/10; nw = length(wlsvec)
     zdvec  = [2,5,10]; nzd = length(zdvec)
     flist = Array{String,2}(undef,nw,nzd)
     for izd in 1 : nzd, iw in 1 : nw
